@@ -1,0 +1,1 @@
+﻿export const CREATE_HOLDING = "CREATE_HOLDING";
