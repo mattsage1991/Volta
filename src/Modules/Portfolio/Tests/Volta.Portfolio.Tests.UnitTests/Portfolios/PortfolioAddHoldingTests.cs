@@ -3,11 +3,27 @@ using NUnit.Framework;
 using Volta.Portfolios.Domain.Holding;
 using Volta.Portfolios.Domain.Portfolios;
 using Volta.Portfolios.Domain.Portfolios.Events;
+using Volta.Portfolios.Domain.Portfolios.Rules;
 
 namespace Volta.Portfolios.Tests.UnitTests.Portfolios
 {
     public class PortfolioAddHoldingTests : PortfolioTestsBase
     {
+        [Test]
+        public void AddHolding_WhenHoldingAlreadyExistsInPortfolio_IsNotPossible()
+        {
+            var portfolioTestData = CreatePortfolioTestData(new HoldingTestDataOptions());
+
+            var newHoldingId = new StockId(Guid.NewGuid());
+            portfolioTestData.Portfolio.AddHolding(newHoldingId, MoneyValue.Undefined, 0);
+
+            AssertBrokenRule<StockCannotBeAHoldingOfPortfolioMoreThanOnce>(() =>
+            {
+                portfolioTestData.Portfolio.AddHolding(newHoldingId, MoneyValue.Undefined,  0);
+            });
+        }
+
+
         [Test]
         public void AddHolding_WhenAllConditionsAllowsNewHolding_IsSuccessful()
         {

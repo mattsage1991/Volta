@@ -7,6 +7,7 @@ using Volta.Portfolios.Domain.Portfolios.Rules;
 
 namespace Volta.Portfolios.Tests.UnitTests.Portfolios
 {
+    [TestFixture]
     public class PortfolioTests : PortfolioTestsBase
     {
         [Test]
