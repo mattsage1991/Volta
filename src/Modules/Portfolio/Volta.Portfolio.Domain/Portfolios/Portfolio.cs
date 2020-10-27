@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Volta.BuildingBlocks.Domain;
 using Volta.Portfolios.Domain.Holding;
+using Volta.Portfolios.Domain.Portfolios.Rules;
 
 namespace Volta.Portfolios.Domain.Portfolios
 {
@@ -25,6 +26,7 @@ namespace Volta.Portfolios.Domain.Portfolios
         {
             _name = name;
             _createDate = DateTime.UtcNow;
+            _holdings = new List<PortfolioHolding>();
         }
 
         public static Portfolio CreateNew(string name)
@@ -32,19 +34,24 @@ namespace Volta.Portfolios.Domain.Portfolios
             return new Portfolio(name);
         }
 
-        public void AddHolding(HoldingId holdingId, MoneyValue averagePrice, int shareQuantity)
+        public void AddHolding(StockId stockId, MoneyValue averagePrice, int shareQuantity)
         {
+            CheckRule(new StockCannotBeAHoldingOfPortfolioMoreThanOnce(stockId, _holdings));
+
             _holdings.Add(PortfolioHolding.Create(
                 Id, 
-                holdingId,
+                stockId,
+                DateTime.UtcNow,
                 shareQuantity,
                 averagePrice
                 ));
         }
 
-        public void RemoveHolding(HoldingId holdingId)
+        public void RemoveHolding(StockId stockId)
         {
-            var holding = _holdings.Single(x => x.HoldingId == holdingId);
+            CheckRule(new OnlyActiveHoldingCanBeRemovedFromPortfolioRule(stockId, _holdings));
+
+            var holding = _holdings.Single(x => x.StockId == stockId);
 
             holding.Remove();
         }

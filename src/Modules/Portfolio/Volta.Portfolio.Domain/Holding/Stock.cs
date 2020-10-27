@@ -2,14 +2,14 @@
 
 namespace Volta.Portfolios.Domain.Holding
 {
-    public class Holding : Entity
+    public class Stock : Entity
     {
-        public HoldingId Id { get; private set; }
+        public StockId Id { get; private set; }
 
         private string _tickerSymbol;
         private decimal _closePrice;
 
-        private Holding()
+        private Stock()
         {
         }
     }

@@ -5,23 +5,27 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Client", "Volta.Client\Volta.Client.csproj", "{4C2A5700-9DA4-4A29-820F-13439B927EE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volta.Portfolios.Domain", "src\Modules\Portfolio\Volta.Portfolio.Domain\Volta.Portfolios.Domain.csproj", "{AF15259D-4DFD-488B-95F7-D376AE063782}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Portfolios.Domain", "src\Modules\Portfolio\Volta.Portfolio.Domain\Volta.Portfolios.Domain.csproj", "{AF15259D-4DFD-488B-95F7-D376AE063782}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{7D292C43-505C-44BB-83EC-589F936923A3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portfolios", "Portfolios", "{C6C2FDA8-247E-47E8-98A4-D9F32129F39E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volta.Portfolios.Application", "src\Modules\Portfolio\Volta.Portfolio.Application\Volta.Portfolios.Application.csproj", "{734D50D6-B32D-4022-9928-C52473B32629}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Portfolios.Application", "src\Modules\Portfolio\Volta.Portfolio.Application\Volta.Portfolios.Application.csproj", "{734D50D6-B32D-4022-9928-C52473B32629}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volta.Portfolios.API", "src\Modules\Portfolio\Volta.Portfolio.API\Volta.Portfolios.API.csproj", "{9445AEEC-E677-4BCB-899F-386ACDDC9833}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Portfolios.API", "src\Modules\Portfolio\Volta.Portfolio.API\Volta.Portfolios.API.csproj", "{9445AEEC-E677-4BCB-899F-386ACDDC9833}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volta.Portfolios.Infrastructure", "src\Modules\Portfolio\Volta.Portfolio.Infrastructure\Volta.Portfolios.Infrastructure.csproj", "{4780FE29-FB30-4F77-AC44-F48284DA507D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Portfolios.Infrastructure", "src\Modules\Portfolio\Volta.Portfolio.Infrastructure\Volta.Portfolios.Infrastructure.csproj", "{4780FE29-FB30-4F77-AC44-F48284DA507D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{5A84DFD9-3B2F-42F5-B328-F1A7205BF241}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volta.BuildingBlocks.Domain", "src\BuildingBlocks\Volta.BuildingBlocks.Domain\Volta.BuildingBlocks.Domain.csproj", "{EA230FB5-6461-45B8-A75E-F9540FC6F074}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.BuildingBlocks.Domain", "src\BuildingBlocks\Volta.BuildingBlocks.Domain\Volta.BuildingBlocks.Domain.csproj", "{EA230FB5-6461-45B8-A75E-F9540FC6F074}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volta.BuildingBlocks.Application", "src\BuildingBlocks\Volta.BuildingBlocks.Application\Volta.BuildingBlocks.Application.csproj", "{BD559183-CDC2-47B3-A6C0-AD1A802E2417}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.BuildingBlocks.Application", "src\BuildingBlocks\Volta.BuildingBlocks.Application\Volta.BuildingBlocks.Application.csproj", "{BD559183-CDC2-47B3-A6C0-AD1A802E2417}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7B0427AF-B400-4DA4-BD59-EF7DE58EDAE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volta.Portfolios.Tests.UnitTests", "src\Modules\Portfolio\Tests\Volta.Portfolio.Tests.UnitTests\Volta.Portfolios.Tests.UnitTests.csproj", "{E7DA35F2-4A92-42A8-B2F9-1EE5A172BC3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,10 @@ Global
 		{BD559183-CDC2-47B3-A6C0-AD1A802E2417}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD559183-CDC2-47B3-A6C0-AD1A802E2417}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD559183-CDC2-47B3-A6C0-AD1A802E2417}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7DA35F2-4A92-42A8-B2F9-1EE5A172BC3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7DA35F2-4A92-42A8-B2F9-1EE5A172BC3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7DA35F2-4A92-42A8-B2F9-1EE5A172BC3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7DA35F2-4A92-42A8-B2F9-1EE5A172BC3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +77,8 @@ Global
 		{4780FE29-FB30-4F77-AC44-F48284DA507D} = {C6C2FDA8-247E-47E8-98A4-D9F32129F39E}
 		{EA230FB5-6461-45B8-A75E-F9540FC6F074} = {5A84DFD9-3B2F-42F5-B328-F1A7205BF241}
 		{BD559183-CDC2-47B3-A6C0-AD1A802E2417} = {5A84DFD9-3B2F-42F5-B328-F1A7205BF241}
+		{7B0427AF-B400-4DA4-BD59-EF7DE58EDAE4} = {C6C2FDA8-247E-47E8-98A4-D9F32129F39E}
+		{E7DA35F2-4A92-42A8-B2F9-1EE5A172BC3C} = {7B0427AF-B400-4DA4-BD59-EF7DE58EDAE4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {08728F90-8ADD-432E-86B6-F52EC7A0DEA0}
