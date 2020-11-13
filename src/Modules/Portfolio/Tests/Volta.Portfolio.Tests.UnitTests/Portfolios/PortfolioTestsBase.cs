@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Volta.Portfolios.Domain.Holding;
 using Volta.Portfolios.Domain.Portfolios;
+using Volta.Portfolios.Domain.Stocks;
 using Volta.Portfolios.Tests.UnitTests.SeedWork;
 
 namespace Volta.Portfolios.Tests.UnitTests.Portfolios

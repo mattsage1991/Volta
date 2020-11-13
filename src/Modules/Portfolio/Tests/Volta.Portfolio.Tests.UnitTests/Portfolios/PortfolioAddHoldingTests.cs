@@ -1,9 +1,9 @@
 ﻿using System;
 using NUnit.Framework;
-using Volta.Portfolios.Domain.Holding;
 using Volta.Portfolios.Domain.Portfolios;
 using Volta.Portfolios.Domain.Portfolios.Events;
 using Volta.Portfolios.Domain.Portfolios.Rules;
+using Volta.Portfolios.Domain.Stocks;
 
 namespace Volta.Portfolios.Tests.UnitTests.Portfolios
 {

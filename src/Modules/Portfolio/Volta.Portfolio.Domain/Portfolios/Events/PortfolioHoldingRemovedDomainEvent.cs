@@ -1,5 +1,5 @@
 ﻿using Volta.BuildingBlocks.Domain;
-using Volta.Portfolios.Domain.Holding;
+using Volta.Portfolios.Domain.Stocks;
 
 namespace Volta.Portfolios.Domain.Portfolios.Events
 {
