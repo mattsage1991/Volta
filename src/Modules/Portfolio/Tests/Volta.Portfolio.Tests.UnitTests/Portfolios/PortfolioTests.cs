@@ -15,13 +15,13 @@ namespace Volta.Portfolios.Tests.UnitTests.Portfolios
         {
             var portfolioTestData = CreatePortfolioTestData(new HoldingTestDataOptions());
 
-            var holdingToRemoveId = new StockId(Guid.NewGuid());
+            var holdingToRemoveId = new HoldingId(Guid.NewGuid());
             portfolioTestData.Portfolio.AddHolding(holdingToRemoveId, MoneyValue.Of(10,"gbp"), 1);
 
             portfolioTestData.Portfolio.RemoveHolding(holdingToRemoveId);
 
             var portfolioHoldingRemoved = AssertPublishedDomainEvent<PortfolioHoldingRemovedDomainEvent>(portfolioTestData.Portfolio);
-            Assert.That(portfolioHoldingRemoved.StockId, Is.EqualTo(holdingToRemoveId));
+            Assert.That(portfolioHoldingRemoved.HoldingId, Is.EqualTo(holdingToRemoveId));
             Assert.That(portfolioHoldingRemoved.PortfolioId, Is.EqualTo(portfolioTestData.Portfolio.Id));
         }
 
@@ -30,7 +30,7 @@ namespace Volta.Portfolios.Tests.UnitTests.Portfolios
         {
             var portfolioTestData = CreatePortfolioTestData(new HoldingTestDataOptions());
 
-            var holdingToRemoveId = new StockId(Guid.NewGuid());
+            var holdingToRemoveId = new HoldingId(Guid.NewGuid());
 
             AssertBrokenRule<OnlyActiveHoldingCanBeRemovedFromPortfolioRule>(() =>
             {

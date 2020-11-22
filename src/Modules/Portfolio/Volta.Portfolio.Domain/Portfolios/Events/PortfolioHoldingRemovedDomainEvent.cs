@@ -5,13 +5,13 @@ namespace Volta.Portfolios.Domain.Portfolios.Events
 {
     public class PortfolioHoldingRemovedDomainEvent : DomainEventBase
     {
-        public PortfolioHoldingRemovedDomainEvent(StockId stockId, PortfolioId portfolioId)
+        public PortfolioHoldingRemovedDomainEvent(HoldingId holdingId, PortfolioId portfolioId)
         {
-            StockId = stockId;
+            HoldingId = holdingId;
             PortfolioId = portfolioId;
         }
 
-        public StockId StockId { get; }
+        public HoldingId HoldingId { get; }
         public PortfolioId PortfolioId { get; }
     }
 }

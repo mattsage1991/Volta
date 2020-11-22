@@ -34,24 +34,24 @@ namespace Volta.Portfolios.Domain.Portfolios
             return new Portfolio(name);
         }
 
-        public void AddHolding(StockId stockId, MoneyValue averagePrice, int shareQuantity)
+        public void AddHolding(HoldingId holdingId, MoneyValue averagePrice, int shareQuantity)
         {
-            CheckRule(new StockCannotBeAHoldingOfPortfolioMoreThanOnce(stockId, _holdings));
+            CheckRule(new StockCannotBeAHoldingOfPortfolioMoreThanOnce(holdingId, _holdings));
 
             _holdings.Add(PortfolioHolding.Create(
                 Id, 
-                stockId,
+                holdingId,
                 DateTime.UtcNow,
                 shareQuantity,
                 averagePrice
                 ));
         }
 
-        public void RemoveHolding(StockId stockId)
+        public void RemoveHolding(HoldingId holdingId)
         {
-            CheckRule(new OnlyActiveHoldingCanBeRemovedFromPortfolioRule(stockId, _holdings));
+            CheckRule(new OnlyActiveHoldingCanBeRemovedFromPortfolioRule(holdingId, _holdings));
 
-            var holding = _holdings.Single(x => x.StockId == stockId);
+            var holding = _holdings.Single(x => x.HoldingId == holdingId);
 
             holding.Remove();
         }

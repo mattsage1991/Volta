@@ -10,7 +10,7 @@ namespace Volta.Portfolios.Tests.UnitTests.Portfolios
     {
         protected class HoldingTestDataOptions
         {
-            public IEnumerable<StockId> Holdings { get; set; } = Enumerable.Empty<StockId>();
+            public IEnumerable<HoldingId> Holdings { get; set; } = Enumerable.Empty<HoldingId>();
         }
 
         protected class PortfolioTestData

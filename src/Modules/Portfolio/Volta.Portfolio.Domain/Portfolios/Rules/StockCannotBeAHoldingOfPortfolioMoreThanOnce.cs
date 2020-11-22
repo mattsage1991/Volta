@@ -7,18 +7,18 @@ namespace Volta.Portfolios.Domain.Portfolios.Rules
 {
     public class StockCannotBeAHoldingOfPortfolioMoreThanOnce : IBusinessRule
     {
-        private readonly StockId _stockId;
+        private readonly HoldingId _holdingId;
 
         private readonly List<PortfolioHolding> _holdings;
 
-        public StockCannotBeAHoldingOfPortfolioMoreThanOnce(StockId stockId, List<PortfolioHolding> holdings)
+        public StockCannotBeAHoldingOfPortfolioMoreThanOnce(HoldingId holdingId, List<PortfolioHolding> holdings)
         {
-            _stockId = stockId;
+            _holdingId = holdingId;
             _holdings = holdings;
         }
 
         public bool IsBroken() => _holdings.SingleOrDefault(x => x.IsActive()) != null;
 
-        public string Message => "Stock is already a holding in this portfolio";
+        public string Message => "Holding is already a holding in this portfolio";
     }
 }

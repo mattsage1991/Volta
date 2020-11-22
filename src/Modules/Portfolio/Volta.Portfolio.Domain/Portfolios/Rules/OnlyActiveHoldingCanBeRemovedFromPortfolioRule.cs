@@ -7,13 +7,13 @@ namespace Volta.Portfolios.Domain.Portfolios.Rules
 {
     public class OnlyActiveHoldingCanBeRemovedFromPortfolioRule : IBusinessRule
     {
-        private readonly StockId _stockId;
+        private readonly HoldingId _holdingId;
 
         private readonly List<PortfolioHolding> _holdings;
 
-        public OnlyActiveHoldingCanBeRemovedFromPortfolioRule(StockId stockId, List<PortfolioHolding> holdings)
+        public OnlyActiveHoldingCanBeRemovedFromPortfolioRule(HoldingId holdingId, List<PortfolioHolding> holdings)
         {
-            _stockId = stockId;
+            _holdingId = holdingId;
             _holdings = holdings;
         }
 

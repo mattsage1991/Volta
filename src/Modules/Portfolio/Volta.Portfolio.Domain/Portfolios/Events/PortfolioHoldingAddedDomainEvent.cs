@@ -8,14 +8,14 @@ namespace Volta.Portfolios.Domain.Portfolios.Events
     {
         public PortfolioHoldingAddedDomainEvent(
             PortfolioId portfolioId, 
-            StockId stockId,
+            HoldingId holdingId,
             DateTime addedDate,
             decimal? sharePriceValue,
             string sharePriceCurrency,
             int quantity)
         {
             PortfolioId = portfolioId;
-            StockId = stockId;
+            HoldingId = holdingId;
             AddedDate = addedDate;
             SharePriceValue = sharePriceValue;
             SharePriceCurrency = sharePriceCurrency;
@@ -23,7 +23,7 @@ namespace Volta.Portfolios.Domain.Portfolios.Events
         }
 
         public PortfolioId PortfolioId { get; set; }
-        public StockId StockId { get; set; }
+        public HoldingId HoldingId { get; set; }
         public DateTime AddedDate { get; set; }
         public decimal? SharePriceValue { get; set; }
         public string SharePriceCurrency { get; set; }

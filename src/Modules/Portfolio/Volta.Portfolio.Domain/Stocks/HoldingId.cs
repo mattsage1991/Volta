@@ -3,9 +3,9 @@ using Volta.BuildingBlocks.Domain;
 
 namespace Volta.Portfolios.Domain.Stocks
 {
-    public class StockId : TypedIdValueBase
+    public class HoldingId : TypedIdValueBase
     {
-        public StockId(Guid value) : base(value)
+        public HoldingId(Guid value) : base(value)
         {
         }
     }

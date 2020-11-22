@@ -14,7 +14,7 @@ namespace Volta.Portfolios.Tests.UnitTests.Portfolios
         {
             var portfolioTestData = CreatePortfolioTestData(new HoldingTestDataOptions());
 
-            var newHoldingId = new StockId(Guid.NewGuid());
+            var newHoldingId = new HoldingId(Guid.NewGuid());
             portfolioTestData.Portfolio.AddHolding(newHoldingId, MoneyValue.Undefined, 0);
 
             AssertBrokenRule<StockCannotBeAHoldingOfPortfolioMoreThanOnce>(() =>
@@ -29,14 +29,14 @@ namespace Volta.Portfolios.Tests.UnitTests.Portfolios
         {
             var portfolioTestData = CreatePortfolioTestData(new HoldingTestDataOptions());
 
-            var newHoldingId = new StockId(Guid.NewGuid());
+            var newHoldingId = new HoldingId(Guid.NewGuid());
 
             portfolioTestData.Portfolio.AddHolding(newHoldingId, MoneyValue.Of(1000,"gbp"), 10);
 
             var portfolioHoldingsAddedEvents =
                 AssertPublishedDomainEvent<PortfolioHoldingAddedDomainEvent>(portfolioTestData.Portfolio);
 
-            Assert.That(portfolioHoldingsAddedEvents.StockId, Is.EqualTo(newHoldingId));
+            Assert.That(portfolioHoldingsAddedEvents.HoldingId, Is.EqualTo(newHoldingId));
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Volta.Portfolios.Domain.Portfolios
     public class PortfolioHolding : Entity
     {
         internal PortfolioId PortfolioId { get; private set; }
-        internal StockId StockId { get; private set; }
+        internal HoldingId HoldingId { get; private set; }
         private DateTime _addedDate;
         private MoneyValue _sharePrice;
         private int _quantity;
@@ -21,30 +21,30 @@ namespace Volta.Portfolios.Domain.Portfolios
 
         internal static PortfolioHolding Create(
             PortfolioId portfolioId,
-            StockId stockId,
+            HoldingId holdingId,
             DateTime addedDate,
             int quantity,
             MoneyValue averagePrice)
         {
-            return new PortfolioHolding(portfolioId, stockId, addedDate, quantity, averagePrice);
+            return new PortfolioHolding(portfolioId, holdingId, addedDate, quantity, averagePrice);
         }
 
         private PortfolioHolding(
             PortfolioId portfolioId,
-            StockId stockId,
+            HoldingId holdingId,
             DateTime addedDate,
             int quantity,
             MoneyValue sharePrice)
         {
             PortfolioId = portfolioId;
-            StockId = stockId;
+            HoldingId = holdingId;
             _quantity = quantity;
             _sharePrice = sharePrice;
             _addedDate = addedDate;
 
             AddDomainEvent(new PortfolioHoldingAddedDomainEvent(
                 PortfolioId,
-                StockId,
+                HoldingId,
                 addedDate,
                 sharePrice.Value,
                 sharePrice.Currency,
@@ -62,7 +62,7 @@ namespace Volta.Portfolios.Domain.Portfolios
             _removedDate = DateTime.UtcNow;
 
             AddDomainEvent(new PortfolioHoldingRemovedDomainEvent(
-                StockId,
+                HoldingId,
                 PortfolioId));
         }
 
