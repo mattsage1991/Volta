@@ -25,7 +25,7 @@ namespace Volta.Portfolios.Tests.UnitTests.Portfolios
 
         protected PortfolioTestData CreatePortfolioTestData(HoldingTestDataOptions options)
         {
-            var portfolio = Portfolio.CreateNew("name");
+            var portfolio = new Portfolio("name");
 
             foreach (var holding in options.Holdings)
             {

@@ -17,7 +17,7 @@ namespace Volta.Portfolios.Application.Commands.CreatePortfolios
 
         public async Task<Guid> Handle(CreatePortfolioCommand request, CancellationToken cancellationToken)
         {
-            var portfolio = Portfolio.CreateNew(request.Name);
+            var portfolio = new Portfolio(request.Name);
 
             await portfolioRepository.Add(portfolio);
 

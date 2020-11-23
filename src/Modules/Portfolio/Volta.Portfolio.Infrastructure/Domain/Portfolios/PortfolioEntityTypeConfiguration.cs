@@ -1,8 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Volta.Portfolios.Domain.Holding;
 using Volta.Portfolios.Domain.Portfolios;
+using Volta.Portfolios.Domain.Stocks;
 
 namespace Volta.Portfolios.Infrastructure.Domain.Portfolios
 {

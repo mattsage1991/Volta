@@ -2,36 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using Volta.BuildingBlocks.Domain;
+using Volta.Portfolios.Domain.Members;
 using Volta.Portfolios.Domain.Portfolios.Rules;
 using Volta.Portfolios.Domain.Stocks;
 
 namespace Volta.Portfolios.Domain.Portfolios
 {
-    public class Portfolio : Entity, IAggregateRoot
+    public class Portfolio : Entity
     {
-        public PortfolioId Id { get; private set; }
+        public PortfolioId Id { get; }
 
-        private string _name;
-
-        private List<PortfolioHolding> _holdings;
-
-        private DateTime _createDate;
-
-        private Portfolio()
+        public MemberId MemberId { get; }
+        
+        public Portfolio(PortfolioId id, MemberId memberId, string name)
         {
-            _holdings = new List<PortfolioHolding>();
-        }
-
-        private Portfolio(string name)
-        {
+            Id = id;
+            MemberId = memberId;
             _name = name;
             _createDate = DateTime.UtcNow;
             _holdings = new List<PortfolioHolding>();
-        }
-
-        public static Portfolio CreateNew(string name)
-        {
-            return new Portfolio(name);
         }
 
         public void AddHolding(HoldingId holdingId, MoneyValue averagePrice, int shareQuantity)
@@ -55,5 +44,11 @@ namespace Volta.Portfolios.Domain.Portfolios
 
             holding.Remove();
         }
+
+        private string _name;
+
+        private List<PortfolioHolding> _holdings;
+
+        private DateTime _createDate;
     }
 }

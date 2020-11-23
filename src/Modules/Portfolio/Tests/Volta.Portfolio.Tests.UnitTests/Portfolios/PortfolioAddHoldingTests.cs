@@ -10,7 +10,7 @@ namespace Volta.Portfolios.Tests.UnitTests.Portfolios
     public class PortfolioAddHoldingTests : PortfolioTestsBase
     {
         [Test]
-        public void AddHolding_WhenHoldingAlreadyExistsInPortfolio_IsNotPossible()
+        public void WhenHoldingAlreadyExistsInPortfolio_IsNotPossible()
         {
             var portfolioTestData = CreatePortfolioTestData(new HoldingTestDataOptions());
 
@@ -25,7 +25,7 @@ namespace Volta.Portfolios.Tests.UnitTests.Portfolios
 
 
         [Test]
-        public void AddHolding_WhenAllConditionsAllowsNewHolding_IsSuccessful()
+        public void WhenAllConditionsAllowsNewHolding_IsSuccessful()
         {
             var portfolioTestData = CreatePortfolioTestData(new HoldingTestDataOptions());
 
