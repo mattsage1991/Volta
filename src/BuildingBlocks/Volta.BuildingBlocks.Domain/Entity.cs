@@ -1,11 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Volta.BuildingBlocks.Domain
 {
     public abstract class Entity
     {
+        // NEW
+        private readonly List<object> _events;
+        
+        protected Entity() => _events = new List<object>();
+
+        protected void Raise(object @event) => _events.Add(@event);
+
+        public IEnumerable<object> GetChanges() => _events.AsEnumerable();
+
+        public void ClearChanges() => _events.Clear();
+
+
+        // OLD
         private List<IDomainEvent> _domainEvents;
 
         /// <summary>

@@ -4,11 +4,12 @@ namespace Volta.Stocks.Domain.Stocks.Services
 {
     public interface IStockLookup
     {
-        StockDetails FindStock(string symbol);
+        KeyStats FindStock(string symbol);
     }
 
-    public class StockDetails : ValueObject
+    public class KeyStats : ValueObject
     {
+        public string Symbol { get; set; }
         public long MarketCap { get; set; }
         public decimal PeRatio { get; set; }
         public decimal PegRatio { get; set; }
@@ -16,6 +17,6 @@ namespace Volta.Stocks.Domain.Stocks.Services
         public decimal ProfitMargin { get; set; }
         public long TotalRevenue { get; set; }
         public decimal DividendYield { get; set; }
-        public static StockDetails None => new StockDetails();
+        public static KeyStats None => new KeyStats();
     }
 }

@@ -22,7 +22,7 @@ namespace Volta.Customers.Domain.Customers
         {
         }
 
-        private Customer(CustomerRegistrationId customerRegistrationId, string email, string password, string firstName, string lastName)
+        public Customer(CustomerRegistrationId customerRegistrationId, string email, string password, string firstName, string lastName)
         {
             this.Id = new CustomerId(customerRegistrationId.Value);
             _email = email;
@@ -33,16 +33,6 @@ namespace Volta.Customers.Domain.Customers
             _isActive = true;
 
             AddDomainEvent(new CustomerCreatedDomainEvent(this.Id));
-        }
-
-        internal static Customer CreateFromCustomerRegistration(
-            CustomerRegistrationId customerRegistrationId,
-            string email,
-            string password,
-            string firstName,
-            string lastName)
-        {
-            return new Customer(customerRegistrationId, email, password, firstName, lastName);
         }
     }
 }

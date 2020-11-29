@@ -1,8 +1,9 @@
 ﻿using System;
+using Volta.BuildingBlocks.Domain;
 
 namespace Volta.Stocks.Domain.Stocks
 {
-    public class StockId
+    public class StockId : Value<StockId>
     {
         private readonly Guid _value;
 
@@ -13,5 +14,7 @@ namespace Volta.Stocks.Domain.Stocks
 
             _value = value;
         }
+
+        public static implicit operator Guid(StockId self) => self._value;
     }
 }

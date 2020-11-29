@@ -8,22 +8,36 @@ namespace Volta.Stocks.Domain.Stocks
     {
         public StockId Id { get; }
 
-        public StockDetails StockDetails { get; }
+        public KeyStats KeyStats { get; private set; }
 
         public Stock(StockId id, string companyName, string symbol, IStockLookup stockLookup)
         {
             if(string.IsNullOrEmpty(symbol))
                 throw new ArgumentNullException(nameof(symbol), "Symbol must be specified");
 
-            var stockDetails = stockLookup.FindStock(symbol);
+            var keyStats = stockLookup.FindStock(symbol);
 
             Id = id;
-            StockDetails = stockDetails;
+            KeyStats = keyStats;
             _companyName = companyName;
-            _symbol = symbol;
+
+            Raise(new Events.StockCreated
+            {
+                Id = id
+            });
+        }
+
+        public void RefreshKeyStats(IStockLookup stockLookup)
+        {
+            var keyStats = stockLookup.FindStock(KeyStats.Symbol);
+            KeyStats = keyStats;
+
+            Raise(new Events.StockKeyStatsUpdated
+            {
+                Id = Id
+            });
         }
         
         private string _companyName;
-        private string _symbol;
     }
 }
