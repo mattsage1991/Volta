@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Volta.BuildingBlocks.Domain;
+using Volta.BuildingBlocks.Domain.Entities;
+using Volta.BuildingBlocks.Domain.Events;
 
 namespace Volta.Portfolios.Tests.UnitTests.SeedWork
 {

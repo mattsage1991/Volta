@@ -3,13 +3,11 @@ using MediatR;
 
 namespace Volta.BuildingBlocks.Application
 {
-    public interface ICommand<out TResult> : IRequest<TResult>
+    public interface ICommand
     {
-        Guid Id { get; }
     }
 
-    public interface ICommand : IRequest
+    public interface ICommand<T> : IRequest<T>, ICommand
     {
-        Guid Id { get; }
     }
 }

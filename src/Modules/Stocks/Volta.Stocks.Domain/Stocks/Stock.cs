@@ -1,5 +1,7 @@
 ﻿using System;
 using Volta.BuildingBlocks.Domain;
+using Volta.BuildingBlocks.Domain.Entities;
+using Volta.Stocks.Domain.Stocks.Events;
 using Volta.Stocks.Domain.Stocks.Services;
 
 namespace Volta.Stocks.Domain.Stocks
@@ -10,7 +12,9 @@ namespace Volta.Stocks.Domain.Stocks
 
         public KeyStats KeyStats { get; private set; }
 
-        public Stock(StockId id, string companyName, string symbol, IStockLookup stockLookup)
+        private Stock() { }
+
+        private Stock(StockId id, string companyName, string symbol, IStockLookup stockLookup)
         {
             if(string.IsNullOrEmpty(symbol))
                 throw new ArgumentNullException(nameof(symbol), "Symbol must be specified");
@@ -21,10 +25,12 @@ namespace Volta.Stocks.Domain.Stocks
             KeyStats = keyStats;
             _companyName = companyName;
 
-            Raise(new Events.StockCreated
-            {
-                Id = id
-            });
+            AddDomainEvent(new StockCreatedDomainEvent(Id));
+        }
+
+        public static Stock CreateNew(StockId stockId, string companyName, string symbol, IStockLookup stockLookup)
+        {
+            return new Stock(stockId, companyName, symbol, stockLookup);
         }
 
         public void RefreshKeyStats(IStockLookup stockLookup)
@@ -32,10 +38,7 @@ namespace Volta.Stocks.Domain.Stocks
             var keyStats = stockLookup.FindStock(KeyStats.Symbol);
             KeyStats = keyStats;
 
-            Raise(new Events.StockKeyStatsUpdated
-            {
-                Id = Id
-            });
+            AddDomainEvent(new StockKeyStatsUpdatedDomainEvent(Id));
         }
         
         private string _companyName;

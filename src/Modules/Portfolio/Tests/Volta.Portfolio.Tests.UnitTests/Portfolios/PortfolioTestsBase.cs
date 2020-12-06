@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Volta.Portfolios.Domain.Members;
 using Volta.Portfolios.Domain.Portfolios;
 using Volta.Portfolios.Domain.Stocks;
 using Volta.Portfolios.Tests.UnitTests.SeedWork;
@@ -25,7 +27,7 @@ namespace Volta.Portfolios.Tests.UnitTests.Portfolios
 
         protected PortfolioTestData CreatePortfolioTestData(HoldingTestDataOptions options)
         {
-            var portfolio = new Portfolio("name");
+            var portfolio = new Portfolio(new PortfolioId(Guid.NewGuid()), new MemberId(Guid.NewGuid()), "name");
 
             foreach (var holding in options.Holdings)
             {

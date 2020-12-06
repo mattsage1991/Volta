@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Volta.BuildingBlocks.Domain;
+using Volta.BuildingBlocks.Domain.Entities;
 using Volta.Portfolios.Domain.Members;
 using Volta.Portfolios.Domain.Portfolios.Rules;
 using Volta.Portfolios.Domain.Stocks;

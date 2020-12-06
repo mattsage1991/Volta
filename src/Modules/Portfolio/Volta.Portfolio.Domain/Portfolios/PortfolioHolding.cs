@@ -1,5 +1,6 @@
 ﻿using System;
 using Volta.BuildingBlocks.Domain;
+using Volta.BuildingBlocks.Domain.Entities;
 using Volta.Portfolios.Domain.Portfolios.Events;
 using Volta.Portfolios.Domain.Stocks;
 

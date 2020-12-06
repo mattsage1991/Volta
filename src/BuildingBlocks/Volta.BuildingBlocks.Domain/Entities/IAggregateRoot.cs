@@ -1,7 +1,6 @@
-﻿namespace Volta.BuildingBlocks.Domain
+﻿namespace Volta.BuildingBlocks.Domain.Entities
 {
     public interface IAggregateRoot
     {
-        
     }
 }

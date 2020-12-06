@@ -3,11 +3,11 @@ using Volta.BuildingBlocks.Domain;
 
 namespace Volta.Customers.Domain.CustomerRegistrations.Events
 {
-    public class CustomerRegisteredDomainEvent : DomainEvent
+    public class CustomerRegistrationConfirmedDomainEvent : DomainEvent
     {
         public CustomerRegistration CustomerRegistration { get; }
-        
-        public CustomerRegisteredDomainEvent(CustomerRegistration customerRegistration)
+
+        public CustomerRegistrationConfirmedDomainEvent(CustomerRegistration customerRegistration)
         {
             CustomerRegistration = customerRegistration ?? throw new ArgumentNullException(nameof(customerRegistration));
         }

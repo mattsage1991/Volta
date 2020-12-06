@@ -8,20 +8,22 @@ namespace Volta.Portfolios.Application.Commands.CreatePortfolios
 {
     public class CreatePortfolioCommandHandler : ICommandHandler<CreatePortfolioCommand, Guid>
     {
-        private readonly IPortfolioRepository portfolioRepository;
+        private readonly IPortfolioRepository _portfolioRepository;
 
         public CreatePortfolioCommandHandler(IPortfolioRepository portfolioRepository)
         {
-            this.portfolioRepository = portfolioRepository;
+            _portfolioRepository = portfolioRepository;
         }
 
         public async Task<Guid> Handle(CreatePortfolioCommand request, CancellationToken cancellationToken)
         {
-            var portfolio = new Portfolio(request.Name);
+            //var portfolio = new Portfolio(request.Name);
 
-            await portfolioRepository.Add(portfolio);
+            //await portfolioRepository.Add(portfolio);
 
-            return portfolio.Id.Value;
+            //return portfolio.Id.Value;
+
+            throw new NotImplementedException();
         }
     }
 }

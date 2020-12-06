@@ -2,7 +2,7 @@
 
 namespace Volta.BuildingBlocks.Application
 {
-    public interface IQuery<out TResult> : IRequest<TResult>
+    public interface IQuery<T> : IRequest<T>
     {
     }
 }

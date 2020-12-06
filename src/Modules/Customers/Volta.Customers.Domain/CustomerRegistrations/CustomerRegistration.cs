@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Transactions;
 using Volta.BuildingBlocks.Domain;
+using Volta.BuildingBlocks.Domain.Entities;
 using Volta.Customers.Domain.CustomerRegistrations.Events;
 using Volta.Customers.Domain.CustomerRegistrations.Rules;
 using Volta.Customers.Domain.Customers;
@@ -19,7 +20,9 @@ namespace Volta.Customers.Domain.CustomerRegistrations
 
         private string _lastName;
 
-        private DateTime _registerDateTime;
+        private DateTime _registerDate;
+
+        private DateTime? _confirmedDate;
 
         public CustomerRegistration(string email, string password, string firstName, string lastName, ICustomerRegistrationValidator customerRegistrationValidator)
         {
@@ -30,14 +33,9 @@ namespace Volta.Customers.Domain.CustomerRegistrations
             _password = password;
             _firstName = firstName;
             _lastName = lastName;
-            _registerDateTime = DateTime.UtcNow;
+            _registerDate = DateTime.UtcNow;
             
-            AddDomainEvent(new CustomerRegisteredDomainEvent(
-                this.Id,
-                _email,
-                _firstName,
-                _lastName,
-                _registerDateTime));
+            AddDomainEvent(new CustomerRegisteredDomainEvent(this));
         }
         
         public Customer CreateCustomer()
@@ -48,6 +46,13 @@ namespace Volta.Customers.Domain.CustomerRegistrations
                _password,
                _firstName,
                _lastName);
+        }
+
+        public void Confirm()
+        {
+            _confirmedDate = DateTime.UtcNow;
+
+            AddDomainEvent(new CustomerRegistrationConfirmedDomainEvent(this));
         }
     }
 }

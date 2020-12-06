@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Client", "Volta.Client\Volta.Client.csproj", "{4C2A5700-9DA4-4A29-820F-13439B927EE5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Portfolios.Domain", "src\Modules\Portfolio\Volta.Portfolio.Domain\Volta.Portfolios.Domain.csproj", "{AF15259D-4DFD-488B-95F7-D376AE063782}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{7D292C43-505C-44BB-83EC-589F936923A3}"
@@ -45,7 +43,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{237002D8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Stocks.Tests.UnitTests", "src\Modules\Stocks\Tests\Volta.Stocks.Tests.UnitTests\Volta.Stocks.Tests.UnitTests.csproj", "{B6742D7F-D05E-4C38-976E-C841A04233D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volta.Customers.Domain.Tests", "src\Modules\Customers\Volta.Customers.Domain.Tests\Volta.Customers.Domain.Tests.csproj", "{8D93128F-AB16-4AAC-A069-268146DA0DD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Customers.Domain.Tests", "src\Modules\Customers\Volta.Customers.Domain.Tests\Volta.Customers.Domain.Tests.csproj", "{8D93128F-AB16-4AAC-A069-268146DA0DD2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Stocks.Application", "src\Modules\Stocks\Volta.Stocks.Application\Volta.Stocks.Application.csproj", "{728C638E-B7C8-4CC7-82D7-0386213EB738}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Stocks.Infrastructure", "src\Modules\Stocks\Volta.Stocks.Infrastructure\Volta.Stocks.Infrastructure.csproj", "{F0509434-8772-4090-B46E-DC8668E8E051}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volta.BuildingBlocks.Infrastructure", "src\BuildingBlocks\Volta.BuildingBlocks.Infrastructure\Volta.BuildingBlocks.Infrastructure.csproj", "{FF84D62F-6844-40C8-9645-54D3404EF423}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,10 +57,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4C2A5700-9DA4-4A29-820F-13439B927EE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C2A5700-9DA4-4A29-820F-13439B927EE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C2A5700-9DA4-4A29-820F-13439B927EE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C2A5700-9DA4-4A29-820F-13439B927EE5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AF15259D-4DFD-488B-95F7-D376AE063782}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AF15259D-4DFD-488B-95F7-D376AE063782}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF15259D-4DFD-488B-95F7-D376AE063782}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -113,6 +113,18 @@ Global
 		{8D93128F-AB16-4AAC-A069-268146DA0DD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D93128F-AB16-4AAC-A069-268146DA0DD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D93128F-AB16-4AAC-A069-268146DA0DD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{728C638E-B7C8-4CC7-82D7-0386213EB738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{728C638E-B7C8-4CC7-82D7-0386213EB738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{728C638E-B7C8-4CC7-82D7-0386213EB738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{728C638E-B7C8-4CC7-82D7-0386213EB738}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0509434-8772-4090-B46E-DC8668E8E051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0509434-8772-4090-B46E-DC8668E8E051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0509434-8772-4090-B46E-DC8668E8E051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0509434-8772-4090-B46E-DC8668E8E051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF84D62F-6844-40C8-9645-54D3404EF423}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF84D62F-6844-40C8-9645-54D3404EF423}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF84D62F-6844-40C8-9645-54D3404EF423}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF84D62F-6844-40C8-9645-54D3404EF423}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -137,6 +149,9 @@ Global
 		{237002D8-3CFA-4CE7-81D8-BF212996A15B} = {DBA00079-F3CD-44AD-AA79-8D8FE486A126}
 		{B6742D7F-D05E-4C38-976E-C841A04233D0} = {237002D8-3CFA-4CE7-81D8-BF212996A15B}
 		{8D93128F-AB16-4AAC-A069-268146DA0DD2} = {731BA59E-E744-4916-9F5B-E10C6436E6D8}
+		{728C638E-B7C8-4CC7-82D7-0386213EB738} = {DBA00079-F3CD-44AD-AA79-8D8FE486A126}
+		{F0509434-8772-4090-B46E-DC8668E8E051} = {DBA00079-F3CD-44AD-AA79-8D8FE486A126}
+		{FF84D62F-6844-40C8-9645-54D3404EF423} = {5A84DFD9-3B2F-42F5-B328-F1A7205BF241}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {08728F90-8ADD-432E-86B6-F52EC7A0DEA0}

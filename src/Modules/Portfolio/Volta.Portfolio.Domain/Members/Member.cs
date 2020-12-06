@@ -1,4 +1,5 @@
 ﻿using Volta.BuildingBlocks.Domain;
+using Volta.BuildingBlocks.Domain.Entities;
 
 namespace Volta.Portfolios.Domain.Members
 {

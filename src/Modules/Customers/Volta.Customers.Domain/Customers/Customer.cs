@@ -1,4 +1,5 @@
 ﻿using Volta.BuildingBlocks.Domain;
+using Volta.BuildingBlocks.Domain.Entities;
 using Volta.Customers.Domain.CustomerRegistrations;
 using Volta.Customers.Domain.Customers.Events;
 

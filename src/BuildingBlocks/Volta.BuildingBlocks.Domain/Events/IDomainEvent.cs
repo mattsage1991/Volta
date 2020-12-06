@@ -1,12 +1,10 @@
-﻿using MediatR;
-using System;
+﻿using System;
+using MediatR;
 
-namespace Volta.BuildingBlocks.Domain
+namespace Volta.BuildingBlocks.Domain.Events
 {
     public interface IDomainEvent : INotification
     {
-        Guid Id { get; }
-
         DateTime OccurredOn { get; }
     }
 }

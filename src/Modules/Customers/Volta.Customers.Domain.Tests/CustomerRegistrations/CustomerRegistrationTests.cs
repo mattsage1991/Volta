@@ -18,10 +18,10 @@ namespace Volta.Customers.Domain.Tests.CustomerRegistrations
             var password = "password";
             var firstName = "John";
             var lastName = "Doe";
+
             var customerRegistrationValidator = new Mock<ICustomerRegistrationValidator>();
             customerRegistrationValidator.Setup(x => x.IsEmailAddressInUse(email)).Returns(false);
-
-
+            
             var customerRegistration = new CustomerRegistration(email, password, firstName, lastName, customerRegistrationValidator.Object);
 
             customerRegistration.DomainEvents.Should().ContainItemsAssignableTo<CustomerRegisteredDomainEvent>();
@@ -41,6 +41,24 @@ namespace Volta.Customers.Domain.Tests.CustomerRegistrations
             Action act = () => new CustomerRegistration(email, password, firstName, lastName, customerRegistrationValidator.Object);
 
             act.Should().Throw<BusinessRuleValidationException>().WithMessage(new EmailAddressMustBeUniqueRule(customerRegistrationValidator.Object, email).Message);
+        }
+
+        [Fact]
+        public void WhenCustomerConfirmsRegistration_ConfirmationIsSuccessful()
+        {
+            var email = "john.doe@gmail.com";
+            var password = "password";
+            var firstName = "John";
+            var lastName = "Doe";
+
+            var customerRegistrationValidator = new Mock<ICustomerRegistrationValidator>();
+            customerRegistrationValidator.Setup(x => x.IsEmailAddressInUse(email)).Returns(false);
+
+            var customerRegistration = new CustomerRegistration(email, password, firstName, lastName, customerRegistrationValidator.Object);
+
+            customerRegistration.Confirm();
+
+            customerRegistration.DomainEvents.Should().ContainItemsAssignableTo<CustomerRegisteredDomainEvent>();
         }
     }
 }

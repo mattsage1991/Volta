@@ -2,7 +2,7 @@
 
 namespace Volta.Customers.Domain.Customers.Events
 {
-    public class CustomerCreatedDomainEvent : DomainEventBase
+    public class CustomerCreatedDomainEvent : DomainEvent
     {
         public CustomerCreatedDomainEvent(CustomerId id)
         {

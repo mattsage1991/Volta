@@ -4,7 +4,7 @@ using Volta.Portfolios.Domain.Stocks;
 
 namespace Volta.Portfolios.Domain.Portfolios.Events
 {
-    public class PortfolioHoldingAddedDomainEvent : DomainEventBase
+    public class PortfolioHoldingAddedDomainEvent : DomainEvent
     {
         public PortfolioHoldingAddedDomainEvent(
             PortfolioId portfolioId, 
