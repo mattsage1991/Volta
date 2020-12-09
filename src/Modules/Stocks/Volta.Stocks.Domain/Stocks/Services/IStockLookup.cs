@@ -9,14 +9,24 @@ namespace Volta.Stocks.Domain.Stocks.Services
 
     public class KeyStats : ValueObject
     {
-        public string Symbol { get; set; }
-        public long MarketCap { get; set; }
-        public decimal PeRatio { get; set; }
-        public decimal PegRatio { get; set; }
-        public decimal PriceToBookRatio { get; set; }
-        public decimal ProfitMargin { get; set; }
-        public long TotalRevenue { get; set; }
-        public decimal DividendYield { get; set; }
-        public static KeyStats None => new KeyStats();
+        public long MarketCap { get; }
+        public decimal PeRatio { get; }
+        public decimal PegRatio { get; }
+        public decimal PriceToBookRatio { get; }
+        public decimal ProfitMargin { get; }
+        public long TotalRevenue { get; }
+        public decimal DividendYield { get; }
+
+        private KeyStats(long marketCap, long totalRevenue, decimal dividendYield, decimal peRatio, 
+            decimal pegRatio, decimal priceToBookRatio, decimal profitMargin)
+        {
+            MarketCap = marketCap;
+            TotalRevenue = totalRevenue;
+            DividendYield = dividendYield;
+            PeRatio = peRatio;
+            PegRatio = pegRatio;
+            PriceToBookRatio = priceToBookRatio;
+            ProfitMargin = profitMargin;
+        }
     }
 }

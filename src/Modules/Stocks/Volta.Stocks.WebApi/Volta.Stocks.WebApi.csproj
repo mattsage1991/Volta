@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Volta.Stocks.Application\Volta.Stocks.Application.csproj" />
+  </ItemGroup>
+
 </Project>

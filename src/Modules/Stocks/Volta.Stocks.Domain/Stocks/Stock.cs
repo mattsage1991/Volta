@@ -6,9 +6,13 @@ using Volta.Stocks.Domain.Stocks.Services;
 
 namespace Volta.Stocks.Domain.Stocks
 {
-    public class Stock : Entity
+    public class Stock : Entity, IAggregateRoot
     {
         public StockId Id { get; }
+
+        public string CompanyName { get; }
+
+        public string Symbol { get; }
 
         public KeyStats KeyStats { get; private set; }
 
@@ -23,9 +27,10 @@ namespace Volta.Stocks.Domain.Stocks
 
             Id = id;
             KeyStats = keyStats;
-            _companyName = companyName;
+            CompanyName = companyName;
+            Symbol = symbol;
 
-            AddDomainEvent(new StockCreatedDomainEvent(Id));
+            AddDomainEvent(new StockCreatedDomainEvent(Id, CompanyName, Symbol));
         }
 
         public static Stock CreateNew(StockId stockId, string companyName, string symbol, IStockLookup stockLookup)
@@ -35,12 +40,11 @@ namespace Volta.Stocks.Domain.Stocks
 
         public void RefreshKeyStats(IStockLookup stockLookup)
         {
-            var keyStats = stockLookup.FindStock(KeyStats.Symbol);
+            var keyStats = stockLookup.FindStock(Symbol);
             KeyStats = keyStats;
 
             AddDomainEvent(new StockKeyStatsUpdatedDomainEvent(Id));
         }
-        
-        private string _companyName;
+
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using Volta.Stocks.Domain.Stocks;
 using Volta.Stocks.Domain.Stocks.Services;
+using Volta.Stocks.Domain.Tests;
 using Xunit;
 
 namespace Volta.Stocks.Tests.UnitTests

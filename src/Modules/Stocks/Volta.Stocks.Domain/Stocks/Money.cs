@@ -12,7 +12,7 @@ namespace Volta.Stocks.Domain.Stocks
 
         public static Money FromString(string amount, string currency, ICurrencyLookup currencyLookup) => new Money(decimal.Parse(amount), currency, currencyLookup);
 
-        protected Money(decimal amount, string currencyCode, ICurrencyLookup currencyLookup)
+        private Money(decimal amount, string currencyCode, ICurrencyLookup currencyLookup)
         {
             if (string.IsNullOrEmpty(currencyCode))
                 throw new ArgumentNullException(nameof(currencyCode), "Currency code must be specified");
