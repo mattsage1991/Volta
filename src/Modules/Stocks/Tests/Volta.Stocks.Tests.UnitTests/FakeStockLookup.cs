@@ -32,7 +32,7 @@ namespace Volta.Stocks.Domain.Tests
     //        }
     //    };
 
-    //    public KeyStats FindStock(string symbol)
+    //    public KeyStats GetKeyStats(string symbol)
     //    {
     //        var stock = Stocks.FirstOrDefault(x => x.Symbol == symbol);
     //        return stock ?? KeyStats.None;

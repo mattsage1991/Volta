@@ -5,16 +5,18 @@ namespace Volta.Stocks.Domain.Stocks
 {
     public class StockId : Value<StockId>
     {
-        private readonly Guid _value;
+        public readonly Guid Value;
 
         public StockId(Guid value)
         {
             if (value == default)
                 throw new ArgumentNullException(nameof(value), "Stock id cannot be empty");
 
-            _value = value;
+            Value = value;
         }
 
-        public static implicit operator Guid(StockId self) => self._value;
+        public static StockId Of(Guid id) => new StockId(id);
+
+        public static implicit operator Guid(StockId self) => self.Value;
     }
 }

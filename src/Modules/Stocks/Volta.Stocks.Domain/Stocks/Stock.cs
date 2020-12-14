@@ -23,7 +23,7 @@ namespace Volta.Stocks.Domain.Stocks
             if(string.IsNullOrEmpty(symbol))
                 throw new ArgumentNullException(nameof(symbol), "Symbol must be specified");
 
-            var keyStats = stockLookup.FindStock(symbol);
+            var keyStats = stockLookup.GetKeyStats(symbol).GetAwaiter().GetResult();
 
             Id = id;
             KeyStats = keyStats;
@@ -40,7 +40,7 @@ namespace Volta.Stocks.Domain.Stocks
 
         public void RefreshKeyStats(IStockLookup stockLookup)
         {
-            var keyStats = stockLookup.FindStock(Symbol);
+            var keyStats = stockLookup.GetKeyStats(Symbol).GetAwaiter().GetResult(); ;
             KeyStats = keyStats;
 
             AddDomainEvent(new StockKeyStatsUpdatedDomainEvent(Id));

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Volta.Stocks.Domain.Stocks;
 
@@ -8,10 +9,9 @@ namespace Volta.Stocks.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Stock> builder)
         {
-            builder.Property(x => x.Id);
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.CompanyName).IsRequired();
-            builder.Property(x => x.Symbol).IsRequired();
+            builder.Property(x => x.Id).HasConversion(x => x.Value, x => StockId.Of(x));
+            builder.Property(x => x.CompanyName).IsRequired().HasColumnType("varchar(50)");
+            builder.Property(x => x.Symbol).IsRequired().HasColumnType("varchar(5)");
             builder.OwnsOne(x => x.KeyStats).Property(x => x.MarketCap).HasColumnName("MarketCap");
             builder.OwnsOne(x => x.KeyStats).Property(x => x.TotalRevenue).HasColumnName("TotalRevenue");
             builder.OwnsOne(x => x.KeyStats).Property(x => x.DividendYield).HasColumnName("DividendYield");

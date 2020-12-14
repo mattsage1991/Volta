@@ -25,7 +25,7 @@ namespace Volta.Stocks.Infrastructure
             public StockDbContext CreateDbContext(string[] args)
             {
                 var optionsBuilder = new DbContextOptionsBuilder<StockDbContext>()
-                    .UseSqlServer("Server=.;Initial Catalog=Stocks;Integrated Security=true");
+                    .UseSqlServer("Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=StocksDb;Integrated Security=SSPI;");
 
                 return new StockDbContext(optionsBuilder.Options);
             }

@@ -1,10 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="7.0.0" />
     <ProjectReference Include="..\..\..\BuildingBlocks\Volta.BuildingBlocks.Application\Volta.BuildingBlocks.Application.csproj" />
     <ProjectReference Include="..\Volta.Stocks.Domain\Volta.Stocks.Domain.csproj" />
   </ItemGroup>

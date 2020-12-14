@@ -3,17 +3,22 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Volta.BuildingBlocks.Application;
+using Volta.Stocks.Application.Commands.CreateStock;
 
 namespace Volta.Stocks.WebApi.Services
 {
     public class TimedHostedService : IHostedService, IDisposable
     {
         private readonly ILogger _logger;
+        private readonly IRequestExecutor _requestExecutor;
         private Timer _timer;
 
-        public TimedHostedService(ILogger<TimedHostedService> logger)
+
+        public TimedHostedService(ILogger<TimedHostedService> logger, IRequestExecutor requestExecutor)
         {
             _logger = logger;
+            _requestExecutor = requestExecutor;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -21,14 +26,18 @@ namespace Volta.Stocks.WebApi.Services
             _logger.LogInformation("Timed Background Service is starting.");
 
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
-                TimeSpan.FromSeconds(5));
+                TimeSpan.FromDays(1));
 
             return Task.CompletedTask;
         }
 
-        private void DoWork(object state)
+        private async void DoWork(object state)
         {
             _logger.LogInformation("Timed Background Service is working.");
+            var companyName = "Tesla";
+            var symbol = "TSLA";
+            var stockId = await _requestExecutor.ExecuteCommand(new CreateStockCommand(companyName, symbol));
+            _logger.LogInformation($"Stock Created Successfully: {companyName}:{symbol} with Id {stockId}");
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

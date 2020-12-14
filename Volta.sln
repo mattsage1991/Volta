@@ -35,8 +35,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Stocks.Domain", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Stocks.IEXCloud", "src\Modules\Stocks\Volta.Stocks.IEXCloud\Volta.Stocks.IEXCloud.csproj", "{6289204D-7157-48E4-98ED-A54EEC5F5E23}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Stocks.IEXCloud.Tests", "src\Modules\Stocks\Volta.Stocks.IEXCloud.Tests\Volta.Stocks.IEXCloud.Tests.csproj", "{BF2F87C3-CE73-49A8-B8C1-8FB97C085010}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Stocks.WebApi", "src\Modules\Stocks\Volta.Stocks.WebApi\Volta.Stocks.WebApi.csproj", "{6A8CF9D9-9AED-4F12-9A38-EAEFA6360293}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{237002D8-3CFA-4CE7-81D8-BF212996A15B}"
@@ -53,7 +51,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.BuildingBlocks.Infras
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.BuildingBlocks.WebApi", "src\BuildingBlocks\Volta.BuildingBlocks.WebApi\Volta.BuildingBlocks.WebApi.csproj", "{11F6A6D8-D7FD-4864-9F19-57B3EE41A2BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volta.Stocks.Service.ArchTests", "src\Modules\Stocks\Volta.Stocks.Service.ArchTests\Volta.Stocks.Service.ArchTests.csproj", "{73FC272F-F4D3-4761-8D97-B5B9F0B8D810}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Stocks.Service.ArchTests", "src\Modules\Stocks\Volta.Stocks.Service.ArchTests\Volta.Stocks.Service.ArchTests.csproj", "{73FC272F-F4D3-4761-8D97-B5B9F0B8D810}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,10 +99,6 @@ Global
 		{6289204D-7157-48E4-98ED-A54EEC5F5E23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6289204D-7157-48E4-98ED-A54EEC5F5E23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6289204D-7157-48E4-98ED-A54EEC5F5E23}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BF2F87C3-CE73-49A8-B8C1-8FB97C085010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF2F87C3-CE73-49A8-B8C1-8FB97C085010}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF2F87C3-CE73-49A8-B8C1-8FB97C085010}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF2F87C3-CE73-49A8-B8C1-8FB97C085010}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6A8CF9D9-9AED-4F12-9A38-EAEFA6360293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6A8CF9D9-9AED-4F12-9A38-EAEFA6360293}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A8CF9D9-9AED-4F12-9A38-EAEFA6360293}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -156,7 +150,6 @@ Global
 		{DBA00079-F3CD-44AD-AA79-8D8FE486A126} = {7D292C43-505C-44BB-83EC-589F936923A3}
 		{54F727F2-1BF5-4F14-B183-229601D8B8B5} = {DBA00079-F3CD-44AD-AA79-8D8FE486A126}
 		{6289204D-7157-48E4-98ED-A54EEC5F5E23} = {DBA00079-F3CD-44AD-AA79-8D8FE486A126}
-		{BF2F87C3-CE73-49A8-B8C1-8FB97C085010} = {DBA00079-F3CD-44AD-AA79-8D8FE486A126}
 		{6A8CF9D9-9AED-4F12-9A38-EAEFA6360293} = {DBA00079-F3CD-44AD-AA79-8D8FE486A126}
 		{237002D8-3CFA-4CE7-81D8-BF212996A15B} = {DBA00079-F3CD-44AD-AA79-8D8FE486A126}
 		{B6742D7F-D05E-4C38-976E-C841A04233D0} = {237002D8-3CFA-4CE7-81D8-BF212996A15B}
