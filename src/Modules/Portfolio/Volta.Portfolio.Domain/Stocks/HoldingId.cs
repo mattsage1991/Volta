@@ -1,5 +1,6 @@
 ﻿using System;
 using Volta.BuildingBlocks.Domain;
+using Volta.BuildingBlocks.Domain.ValueObjects;
 
 namespace Volta.Portfolios.Domain.Stocks
 {

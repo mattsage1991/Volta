@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Volta.BuildingBlocks.Domain
+namespace Volta.BuildingBlocks.Domain.ValueObjects
 {
     public abstract class TypedIdValueBase : IEquatable<TypedIdValueBase>
     {

@@ -5,11 +5,11 @@ namespace Volta.Stocks.Domain.Stocks.Events
 {
     public class StockKeyStatsUpdatedDomainEvent : DomainEvent
     {
-        public StockKeyStatsUpdatedDomainEvent(Guid id)
+        public StockKeyStatsUpdatedDomainEvent(StockId id)
         {
             Id = id;
         }
 
-        public Guid Id { get; }
+        public StockId Id { get; }
     }
 }

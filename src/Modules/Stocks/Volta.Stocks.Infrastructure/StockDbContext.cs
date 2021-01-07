@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Storage;
 using Volta.Stocks.Domain.Stocks;
 using Volta.Stocks.Infrastructure.EntityConfigurations;
 
@@ -13,6 +14,9 @@ namespace Volta.Stocks.Infrastructure
 
         public DbSet<Stock> Stocks { get; set; }
 
+        public IDbContextTransaction GetCurrentTransaction() => _currentTransaction;
+        private IDbContextTransaction _currentTransaction;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("Volta.Stock");
@@ -25,7 +29,7 @@ namespace Volta.Stocks.Infrastructure
             public StockDbContext CreateDbContext(string[] args)
             {
                 var optionsBuilder = new DbContextOptionsBuilder<StockDbContext>()
-                    .UseSqlServer("Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=StocksDb;Integrated Security=SSPI;");
+                    .UseSqlServer("Server=.;Initial Catalog=Stocks;Integrated Security=true");
 
                 return new StockDbContext(optionsBuilder.Options);
             }

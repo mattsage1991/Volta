@@ -50,7 +50,13 @@ namespace Volta.Stocks.WebApi
         public void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterModule(new ApplicationAutofacModule(Configuration.GetConnectionString("StockDatabase")));
-            builder.RegisterModule(new InfrastructureAutofacModule(Configuration.GetConnectionString("StockDatabase")));
+            builder.RegisterModule(new InfrastructureAutofacModule(
+                Configuration.GetConnectionString("StockDatabase"), 
+                Configuration["EventBusRetryCount"], 
+                Configuration["SubscriptionClientName"],
+                Configuration["EventBusConnection"],
+                Configuration["EventBusUserName"],
+                Configuration["EventBusPassword"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

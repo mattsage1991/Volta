@@ -5,15 +5,15 @@ namespace Volta.Stocks.Domain.Stocks.Events
 {
     public class StockCreatedDomainEvent : DomainEvent
     {
-        public StockCreatedDomainEvent(Guid id, string companyName, string symbol)
+        public StockId Id { get; }
+        public CompanyName CompanyName { get; }
+        public TickerSymbol TickerSymbol { get; }
+
+        public StockCreatedDomainEvent(StockId id, CompanyName companyName, TickerSymbol tickerSymbol)
         {
             Id = id;
             CompanyName = companyName;
-            Symbol = symbol;
+            TickerSymbol = tickerSymbol;
         }
-
-        public Guid Id { get; }
-        public string CompanyName { get; }
-        public string Symbol { get; }
     }
 }

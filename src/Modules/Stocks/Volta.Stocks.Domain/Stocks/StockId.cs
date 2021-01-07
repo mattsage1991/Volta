@@ -1,22 +1,13 @@
 ﻿using System;
 using Volta.BuildingBlocks.Domain;
+using Volta.BuildingBlocks.Domain.ValueObjects;
 
 namespace Volta.Stocks.Domain.Stocks
 {
-    public class StockId : Value<StockId>
+    public class StockId : TypedIdValueBase
     {
-        public readonly Guid Value;
-
-        public StockId(Guid value)
+        public StockId(Guid id) : base(id)
         {
-            if (value == default)
-                throw new ArgumentNullException(nameof(value), "Stock id cannot be empty");
-
-            Value = value;
         }
-
-        public static StockId Of(Guid id) => new StockId(id);
-
-        public static implicit operator Guid(StockId self) => self.Value;
     }
 }
