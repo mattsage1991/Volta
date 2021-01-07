@@ -6,9 +6,9 @@ namespace Volta.Stocks.Domain.Tests
 {
     //public class FakeStockLookup : IStockLookup
     //{
-    //    private static readonly IEnumerable<KeyStats> Stocks = new[]
+    //    private static readonly IEnumerable<LiveStockData> Stocks = new[]
     //    {
-    //        new KeyStats
+    //        new LiveStockData
     //        {
     //            Symbol = "MSFT",
     //            DividendYield = 0.82m,
@@ -19,7 +19,7 @@ namespace Volta.Stocks.Domain.Tests
     //            ProfitMargin = 20.2m,
     //            TotalRevenue = 1320000000
     //        },
-    //        new KeyStats
+    //        new LiveStockData
     //        {
     //            Symbol = "AAPL",
     //            DividendYield = 1.41m,
@@ -32,10 +32,10 @@ namespace Volta.Stocks.Domain.Tests
     //        }
     //    };
 
-    //    public KeyStats GetKeyStats(string symbol)
+    //    public LiveStockData GetLiveStockData(string symbol)
     //    {
     //        var stock = Stocks.FirstOrDefault(x => x.Symbol == symbol);
-    //        return stock ?? KeyStats.None;
+    //        return stock ?? LiveStockData.None;
     //    }
     //}
 }

@@ -5,10 +5,10 @@ namespace Volta.Stocks.Domain.Stocks.Services
 {
     public interface IStockLookup
     {
-        Task<KeyStats> GetKeyStats(TickerSymbol symbol);
+        Task<LiveStockData> GetLiveStockData(TickerSymbol symbol);
     }
 
-    public class KeyStats
+    public class LiveStockData
     {
         public MarketCap MarketCap { get; }
         public PeRatio PeRatio { get; }
@@ -18,7 +18,7 @@ namespace Volta.Stocks.Domain.Stocks.Services
         public TotalRevenue TotalRevenue { get; }
         public DividendYield DividendYield { get; }
 
-        private KeyStats(MarketCap marketCap, PeRatio peRatio, PegRatio pegRatio, PriceToBookRatio priceToBookRatio,
+        private LiveStockData(MarketCap marketCap, PeRatio peRatio, PegRatio pegRatio, PriceToBookRatio priceToBookRatio,
             ProfitMargin profitMargin, TotalRevenue totalRevenue, DividendYield dividendYield)
         {
             this.MarketCap = marketCap;
@@ -30,10 +30,10 @@ namespace Volta.Stocks.Domain.Stocks.Services
             this.ProfitMargin = profitMargin;
         }
 
-        public static KeyStats Of(MarketCap marketCap, PeRatio peRatio, PegRatio pegRatio, PriceToBookRatio priceToBookRatio,
+        public static LiveStockData Of(MarketCap marketCap, PeRatio peRatio, PegRatio pegRatio, PriceToBookRatio priceToBookRatio,
             ProfitMargin profitMargin, TotalRevenue totalRevenue, DividendYield dividendYield)
         {
-            return new KeyStats(marketCap, peRatio, pegRatio, priceToBookRatio, profitMargin, totalRevenue, dividendYield);
+            return new LiveStockData(marketCap, peRatio, pegRatio, priceToBookRatio, profitMargin, totalRevenue, dividendYield);
         }
     }
 }

@@ -39,21 +39,23 @@ namespace Volta.Stocks.Domain.Stocks
 
         public static async Task<Stock> Create(CompanyName companyName, TickerSymbol tickerSymbol, IStockLookup stockLookup)
         {
-            var keyStats = await stockLookup.GetKeyStats(tickerSymbol).ConfigureAwait(false);
-            return new Stock(companyName, tickerSymbol, keyStats.MarketCap, keyStats.PeRatio, keyStats.PegRatio, 
-                keyStats.PriceToBookRatio, keyStats.ProfitMargin, keyStats.TotalRevenue, keyStats.DividendYield);
+            var liveStockData = await stockLookup.GetLiveStockData(tickerSymbol).ConfigureAwait(false);
+
+            return new Stock(companyName, tickerSymbol, liveStockData.MarketCap, liveStockData.PeRatio, liveStockData.PegRatio, 
+                liveStockData.PriceToBookRatio, liveStockData.ProfitMargin, liveStockData.TotalRevenue, liveStockData.DividendYield);
         }
 
-        public void Update(MarketCap marketCap, PeRatio peRatio, PegRatio pegRatio, PriceToBookRatio priceToBookRatio,
-            ProfitMargin profitMargin, TotalRevenue totalRevenue, DividendYield dividendYield)
+        public async void Update(IStockLookup stockLookup)
         {
-            ChangeMarketCap(marketCap);
-            ChangePeRatio(peRatio);
-            ChangePegRatio(pegRatio);
-            ChangePriceToBookRatio(priceToBookRatio);
-            ChangeProfitMargin(profitMargin);
-            ChangeTotalRevenue(totalRevenue);
-            ChangeDividendYield(dividendYield);
+            var liveStockData = await stockLookup.GetLiveStockData(this.tickerSymbol).ConfigureAwait(false);
+
+            ChangeMarketCap(liveStockData.MarketCap);
+            ChangePeRatio(liveStockData.PeRatio);
+            ChangePegRatio(liveStockData.PegRatio);
+            ChangePriceToBookRatio(liveStockData.PriceToBookRatio);
+            ChangeProfitMargin(liveStockData.ProfitMargin);
+            ChangeTotalRevenue(liveStockData.TotalRevenue);
+            ChangeDividendYield(liveStockData.DividendYield);
         }
 
         private void ChangeMarketCap(MarketCap marketCap)

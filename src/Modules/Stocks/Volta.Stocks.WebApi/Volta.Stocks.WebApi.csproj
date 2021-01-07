@@ -8,7 +8,6 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <ProjectReference Include="..\Volta.Stocks.Application\Volta.Stocks.Application.csproj" />
-    <ProjectReference Include="..\Volta.Stocks.IEXCloud\Volta.Stocks.IEXCloud.csproj" />
     <ProjectReference Include="..\Volta.Stocks.Infrastructure\Volta.Stocks.Infrastructure.csproj" />
   </ItemGroup>
 

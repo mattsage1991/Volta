@@ -16,7 +16,7 @@ namespace Volta.Stocks.Infrastructure.Services
             _httpClient = httpClient;
         }
 
-        public async Task<KeyStats> GetKeyStats(TickerSymbol symbol)
+        public async Task<LiveStockData> GetLiveStockData(TickerSymbol symbol)
         {
             var responseString = await _httpClient.GetStringAsync(
                 $"https://sandbox.iexapis.com/stable/stock/{symbol.Value}/advanced-stats?token=Tpk_e3d4d30d956e4241899ec245f92a0593");
@@ -27,7 +27,7 @@ namespace Volta.Stocks.Infrastructure.Services
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                 });
 
-            return KeyStats.Of(MarketCap.Of(advancedStats.Marketcap), PeRatio.Of(advancedStats.PeRatio), PegRatio.Of(advancedStats.PegRatio), 
+            return LiveStockData.Of(MarketCap.Of(advancedStats.Marketcap), PeRatio.Of(advancedStats.PeRatio), PegRatio.Of(advancedStats.PegRatio), 
                 PriceToBookRatio.Of(advancedStats.PriceToBook), ProfitMargin.Of(advancedStats.ProfitMargin), TotalRevenue.Of(advancedStats.TotalRevenue), 
                 DividendYield.Of(advancedStats.DividendYield));
         }

@@ -37,7 +37,7 @@ namespace Volta.Stocks.WebApi.Services
             var companyName = "Tesla";
             var symbol = "TSLA";
             var stockId = await _requestExecutor.ExecuteCommand(new CreateStockCommand(companyName, symbol));
-            _logger.LogInformation($"Stock Created Successfully: {companyName}:{symbol} with Id {stockId}");
+            _logger.LogInformation($"Stock Created Successfully: {companyName}:{symbol} with StockId {stockId}");
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

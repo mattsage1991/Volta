@@ -22,7 +22,7 @@ namespace Volta.Stocks.Infrastructure.Migrations
 
             modelBuilder.Entity("Volta.Stocks.Domain.Stocks.Stock", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("StockId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CompanyName")
@@ -33,14 +33,14 @@ namespace Volta.Stocks.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(5)");
 
-                    b.HasKey("Id");
+                    b.HasKey("StockId");
 
                     b.ToTable("Stocks");
                 });
 
             modelBuilder.Entity("Volta.Stocks.Domain.Stocks.Stock", b =>
                 {
-                    b.OwnsOne("Volta.Stocks.Domain.Stocks.Services.KeyStats", "KeyStats", b1 =>
+                    b.OwnsOne("Volta.Stocks.Domain.Stocks.Services.LiveStockData", "LiveStockData", b1 =>
                         {
                             b1.Property<Guid>("StockId")
                                 .HasColumnType("uniqueidentifier");
@@ -81,7 +81,7 @@ namespace Volta.Stocks.Infrastructure.Migrations
                                 .HasForeignKey("StockId");
                         });
 
-                    b.Navigation("KeyStats");
+                    b.Navigation("LiveStockData");
                 });
 #pragma warning restore 612, 618
         }
