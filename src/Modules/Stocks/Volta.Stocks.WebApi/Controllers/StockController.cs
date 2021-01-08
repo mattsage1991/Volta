@@ -1,26 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Volta.BuildingBlocks.Application;
 using Volta.Stocks.Application.Commands.CreateStock;
+using Volta.Stocks.Application.Models;
 
 namespace Volta.Stocks.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    [Route("api/[controller]")]
     public class StockController : ControllerBase
     {
-        private readonly IRequestExecutor _requestExecutor;
+        private readonly IRequestExecutor requestExecutor;
 
         public StockController(IRequestExecutor requestExecutor)
         {
-            _requestExecutor = requestExecutor ?? throw new ArgumentNullException(nameof(requestExecutor));
+            this.requestExecutor = requestExecutor ?? throw new ArgumentNullException(nameof(requestExecutor));
         }
 
         [HttpPost]
-        public async Task<Guid> CreateStock()
+        public async Task<Guid> CreateStock([FromBody] StockPostModel stockPostModel)
         {
-            return await _requestExecutor.ExecuteCommand(new CreateStockCommand("Tesla", "TSLA"));
+            return await requestExecutor.ExecuteCommand(new CreateStockCommand(stockPostModel.CompanyName, stockPostModel.TickerSymbol));
         }
     }
 }

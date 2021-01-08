@@ -20,7 +20,7 @@ namespace Volta.Stocks.Application.Commands.CreateStock
 
         public async Task<Guid> Handle(CreateStockCommand request, CancellationToken cancellationToken)
         {
-            var stock = await Stock.Create(CompanyName.Of(request.CompanyName), TickerSymbol.Of(request.TicketSymbol), stockLookup);
+            var stock = await Stock.Create(CompanyName.Of(request.CompanyName), TickerSymbol.Of(request.TickerSymbol), stockLookup);
 
             await stockRepository.Add(stock, cancellationToken);
 

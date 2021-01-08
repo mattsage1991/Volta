@@ -34,7 +34,7 @@ namespace Volta.Stocks.WebApi
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddHealthChecks();
-            services.AddHostedService<TimedHostedService>();
+            //services.AddHostedService<TimedHostedService>();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
