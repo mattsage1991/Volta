@@ -16,7 +16,7 @@ namespace Volta.Stocks.Service.ArchTests.SeedWork
 
         protected static Assembly DomainAssembly => typeof(Stock).Assembly;
 
-        protected static Assembly InfrastructureAssembly => typeof(StockDbContext).Assembly;
+        protected static Assembly InfrastructureAssembly => typeof(StocksContext).Assembly;
 
         protected static void AssertAreImmutable(IEnumerable<Type> types)
         {

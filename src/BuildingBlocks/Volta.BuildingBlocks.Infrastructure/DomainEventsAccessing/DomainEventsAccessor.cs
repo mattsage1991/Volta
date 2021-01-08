@@ -15,17 +15,17 @@ namespace Volta.BuildingBlocks.Infrastructure.DomainEventsAccessing
     public class DomainEventsAccessor<T> : IDomainEventsAccessor
         where T : DbContext
     {
-        private readonly DbContext _dbContext;
+        private readonly DbContext dbContext;
 
         public DomainEventsAccessor(T dbContext)
         {
-            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext)); ;
+            this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext)); ;
         }
 
         public List<IDomainEvent> GetAllDomainEvents()
         {
-            var domainEntities = _dbContext.ChangeTracker
-                .Entries<Entity>()
+            var domainEntities = this.dbContext.ChangeTracker
+                .Entries<IEntity>()
                 .Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any()).ToList();
 
             return domainEntities
@@ -35,8 +35,8 @@ namespace Volta.BuildingBlocks.Infrastructure.DomainEventsAccessing
 
         public void ClearAllDomainEvents()
         {
-            var domainEntities = _dbContext.ChangeTracker
-                .Entries<Entity>()
+            var domainEntities = this.dbContext.ChangeTracker
+                .Entries<IEntity>()
                 .Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any()).ToList();
 
             domainEntities

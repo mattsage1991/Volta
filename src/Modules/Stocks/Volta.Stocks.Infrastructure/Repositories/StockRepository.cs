@@ -7,9 +7,9 @@ namespace Volta.Stocks.Infrastructure.Repositories
 {
     public class StockRepository : IStockRepository
     {
-        private readonly StockDbContext _dbContext;
+        private readonly StocksContext _dbContext;
 
-        public StockRepository(StockDbContext dbContext)
+        public StockRepository(StocksContext dbContext)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }

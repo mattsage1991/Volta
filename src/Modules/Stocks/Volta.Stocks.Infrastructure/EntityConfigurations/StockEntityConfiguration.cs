@@ -9,16 +9,52 @@ namespace Volta.Stocks.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Stock> builder)
         {
-            builder.Property(x => x.Id).HasConversion(x => x.Value, x => StockId.Of(x));
-            builder.Property(x => x.CompanyName).IsRequired().HasColumnType("varchar(50)");
-            builder.Property(x => x.Symbol).IsRequired().HasColumnType("varchar(5)");
-            builder.OwnsOne(x => x.KeyStats).Property(x => x.MarketCap).HasColumnName("MarketCap");
-            builder.OwnsOne(x => x.KeyStats).Property(x => x.TotalRevenue).HasColumnName("TotalRevenue");
-            builder.OwnsOne(x => x.KeyStats).Property(x => x.DividendYield).HasColumnName("DividendYield");
-            builder.OwnsOne(x => x.KeyStats).Property(x => x.PeRatio).HasColumnName("PeRatio");
-            builder.OwnsOne(x => x.KeyStats).Property(x => x.PegRatio).HasColumnName("PegRatio");
-            builder.OwnsOne(x => x.KeyStats).Property(x => x.PriceToBookRatio).HasColumnName("PriceToBookRatio");
-            builder.OwnsOne(x => x.KeyStats).Property(x => x.ProfitMargin).HasColumnName("ProfitMargin");
+            builder.HasKey(x => x.Id);
+
+            builder.OwnsOne<CompanyName>("companyName", b =>
+            {
+                b.Property(x => x.Value).HasColumnName("CompanyName");
+            });
+
+            builder.OwnsOne<TickerSymbol>("tickerSymbol", b =>
+            {
+                b.Property(x => x.Value).HasColumnName("TickerSymbol");
+            });
+
+            builder.OwnsOne<MarketCap>("marketCap", b =>
+            {
+                b.Property(x => x.Value).HasColumnName("MarketCap");
+            });
+
+            builder.OwnsOne<PeRatio>("peRatio", b =>
+            {
+                b.Property(x => x.Value).HasColumnName("PeRatio");
+            });
+
+            builder.OwnsOne<PegRatio>("pegRatio", b =>
+            {
+                b.Property(x => x.Value).HasColumnName("PegRatio");
+            });
+
+            builder.OwnsOne<PriceToBookRatio>("priceToBookRatio", b =>
+            {
+                b.Property(x => x.Value).HasColumnName("PriceToBookRatio");
+            });
+
+            builder.OwnsOne<ProfitMargin>("profitMargin", b =>
+            {
+                b.Property(x => x.Value).HasColumnName("ProfitMargin");
+            });
+
+            builder.OwnsOne<TotalRevenue>("totalRevenue", b =>
+            {
+                b.Property(x => x.Value).HasColumnName("TotalRevenue");
+            });
+
+            builder.OwnsOne<DividendYield>("dividendYield", b =>
+            {
+                b.Property(x => x.Value).HasColumnName("DividendYield");
+            });
 
             builder.Ignore(x => x.DomainEvents);
         }

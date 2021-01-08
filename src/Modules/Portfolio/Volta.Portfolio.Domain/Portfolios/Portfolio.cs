@@ -9,10 +9,8 @@ using Volta.Portfolios.Domain.Stocks;
 
 namespace Volta.Portfolios.Domain.Portfolios
 {
-    public class Portfolio : Entity
+    public class Portfolio : Entity<PortfolioId>
     {
-        public PortfolioId Id { get; }
-
         public MemberId MemberId { get; }
         
         public Portfolio(PortfolioId id, MemberId memberId, string name)

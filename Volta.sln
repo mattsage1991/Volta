@@ -51,6 +51,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.BuildingBlocks.WebApi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Stocks.Service.ArchTests", "src\Modules\Stocks\Volta.Stocks.Service.ArchTests\Volta.Stocks.Service.ArchTests.csproj", "{73FC272F-F4D3-4761-8D97-B5B9F0B8D810}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Stocks.WebApi.IntegrationTests", "src\Modules\Stocks\Volta.Stocks.WebApi.IntegrationTests\Volta.Stocks.WebApi.IntegrationTests.csproj", "{54D49CCC-C9B6-4AD8-AEC4-67221E41B874}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volta.Stocks.Integration.Core", "src\Modules\Stocks\Volta.Stocks.Integration.Core\Volta.Stocks.Integration.Core.csproj", "{C5254C1C-6980-4799-ACDE-55E1853B1C96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +129,14 @@ Global
 		{73FC272F-F4D3-4761-8D97-B5B9F0B8D810}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73FC272F-F4D3-4761-8D97-B5B9F0B8D810}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73FC272F-F4D3-4761-8D97-B5B9F0B8D810}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54D49CCC-C9B6-4AD8-AEC4-67221E41B874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54D49CCC-C9B6-4AD8-AEC4-67221E41B874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54D49CCC-C9B6-4AD8-AEC4-67221E41B874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54D49CCC-C9B6-4AD8-AEC4-67221E41B874}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5254C1C-6980-4799-ACDE-55E1853B1C96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5254C1C-6980-4799-ACDE-55E1853B1C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5254C1C-6980-4799-ACDE-55E1853B1C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5254C1C-6980-4799-ACDE-55E1853B1C96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +164,8 @@ Global
 		{FF84D62F-6844-40C8-9645-54D3404EF423} = {5A84DFD9-3B2F-42F5-B328-F1A7205BF241}
 		{11F6A6D8-D7FD-4864-9F19-57B3EE41A2BA} = {5A84DFD9-3B2F-42F5-B328-F1A7205BF241}
 		{73FC272F-F4D3-4761-8D97-B5B9F0B8D810} = {237002D8-3CFA-4CE7-81D8-BF212996A15B}
+		{54D49CCC-C9B6-4AD8-AEC4-67221E41B874} = {237002D8-3CFA-4CE7-81D8-BF212996A15B}
+		{C5254C1C-6980-4799-ACDE-55E1853B1C96} = {237002D8-3CFA-4CE7-81D8-BF212996A15B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {08728F90-8ADD-432E-86B6-F52EC7A0DEA0}

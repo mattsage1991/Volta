@@ -5,19 +5,17 @@ using Volta.Customers.Domain.Customers.Events;
 
 namespace Volta.Customers.Domain.Customers
 {
-    public class Customer : Entity, IAggregateRoot
+    public class Customer : Entity<CustomerId>, IAggregateRoot
     {
-        public CustomerId Id { get; private set; }
+        private string email;
 
-        private string _email;
+        private string password;
 
-        private string _password;
+        private bool isActive;
 
-        private bool _isActive;
+        private string firstName;
 
-        private string _firstName;
-
-        private string _lastName;
+        private string lastName;
 
         private Customer()
         {
@@ -26,12 +24,11 @@ namespace Volta.Customers.Domain.Customers
         public Customer(CustomerRegistrationId customerRegistrationId, string email, string password, string firstName, string lastName)
         {
             this.Id = new CustomerId(customerRegistrationId.Value);
-            _email = email;
-            _password = password;
-            _firstName = firstName;
-            _lastName = lastName;
-
-            _isActive = true;
+            this.email = email;
+            this.password = password;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.isActive = true;
 
             AddDomainEvent(new CustomerCreatedDomainEvent(this.Id));
         }

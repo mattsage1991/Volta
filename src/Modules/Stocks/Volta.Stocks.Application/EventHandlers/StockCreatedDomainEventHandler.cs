@@ -19,8 +19,7 @@ namespace Volta.Stocks.Application.EventHandlers
 
         public async Task Handle(StockCreatedDomainEvent notification, CancellationToken cancellationToken)
         {
-            var stockCreatedIntegrationEvent = new StockCreatedIntegrationEvent(notification.CompanyName, notification.Symbol);
-            await _integrationEventService.AddAndSaveEventAsync(stockCreatedIntegrationEvent);
+            throw new NotImplementedException();
         }
     }
 }

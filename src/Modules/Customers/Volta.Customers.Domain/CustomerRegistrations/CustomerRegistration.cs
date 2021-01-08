@@ -8,10 +8,8 @@ using Volta.Customers.Domain.Customers;
 
 namespace Volta.Customers.Domain.CustomerRegistrations
 {
-    public class CustomerRegistration : Entity
+    public class CustomerRegistration : Entity<CustomerRegistrationId>
     {
-        public CustomerRegistrationId Id { get; }
-
         private string _email;
 
         private string _password;

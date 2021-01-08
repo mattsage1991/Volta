@@ -9,22 +9,22 @@ namespace Volta.Stocks.Application.Commands.CreateStock
 {
     public class CreateStockCommandHandler : ICommandHandler<CreateStockCommand, Guid>
     {
-        private readonly IStockLookup _stockLookup;
-        private readonly IStockRepository _stockRepository;
+        private readonly IStockLookup stockLookup;
+        private readonly IStockRepository stockRepository;
 
         public CreateStockCommandHandler(IStockLookup stockLookup, IStockRepository stockRepository)
         {
-            _stockLookup = stockLookup ?? throw new ArgumentNullException(nameof(stockLookup));
-            _stockRepository = stockRepository ?? throw new ArgumentNullException(nameof(stockRepository));
+            this.stockLookup = stockLookup ?? throw new ArgumentNullException(nameof(stockLookup));
+            this.stockRepository = stockRepository ?? throw new ArgumentNullException(nameof(stockRepository));
         }
 
         public async Task<Guid> Handle(CreateStockCommand request, CancellationToken cancellationToken)
         {
-            var stock = Stock.Create(new StockId(Guid.NewGuid()), request.CompanyName, request.Symbol, _stockLookup);
+            var stock = await Stock.Create(CompanyName.Of(request.CompanyName), TickerSymbol.Of(request.TicketSymbol), stockLookup);
 
-            await _stockRepository.Add(stock, cancellationToken);
+            await stockRepository.Add(stock, cancellationToken);
 
-            return stock.Id;
+            return stock.Id.Value;
         }
     }
 }

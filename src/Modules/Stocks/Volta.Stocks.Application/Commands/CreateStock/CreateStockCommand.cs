@@ -5,13 +5,13 @@ namespace Volta.Stocks.Application.Commands.CreateStock
 {
     public class CreateStockCommand : ICommand<Guid>
     {
-        public CreateStockCommand(string companyName, string symbol)
+        public CreateStockCommand(string companyName, string ticketSymbol)
         {
             CompanyName = companyName;
-            Symbol = symbol;
+            TicketSymbol = ticketSymbol;
         }
 
         public string CompanyName { get; }
-        public string Symbol { get; }
+        public string TicketSymbol { get; }
     }
 }

@@ -4,7 +4,7 @@ using Volta.Stocks.Domain.Stocks.Services;
 using Volta.Stocks.Domain.Tests;
 using Xunit;
 
-namespace Volta.Stocks.Tests.UnitTests
+namespace Volta.Stocks.Domain.UnitTests
 {
     public class MoneyTests
     {

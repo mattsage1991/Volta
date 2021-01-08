@@ -39,14 +39,14 @@ namespace Volta.Stocks.Infrastructure.Setup
         /// <param name="builder">The builder <see cref="ContainerBuilder"/>.</param>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterModule(new InfrastructureBaseAutofacModule<StockDbContext>());
+            builder.RegisterModule(new InfrastructureBaseAutofacModule<StocksContext>());
 
             builder.Register(c =>
             {
-                var opt = new DbContextOptionsBuilder<StockDbContext>();
+                var opt = new DbContextOptionsBuilder<StocksContext>();
                 opt.UseSqlServer(_databaseConnectionString);
 
-                return new StockDbContext(opt.Options);
+                return new StocksContext(opt.Options);
             }).AsSelf().InstancePerLifetimeScope();
 
             builder.Register(c =>

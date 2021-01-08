@@ -6,7 +6,7 @@ using Volta.Portfolios.Domain.Stocks;
 
 namespace Volta.Portfolios.Domain.Portfolios
 {
-    public class PortfolioHolding : Entity
+    public class PortfolioHolding : Entity<PortfolioHoldingId>
     {
         internal PortfolioId PortfolioId { get; private set; }
         internal HoldingId HoldingId { get; private set; }
@@ -66,6 +66,5 @@ namespace Volta.Portfolios.Domain.Portfolios
                 HoldingId,
                 PortfolioId));
         }
-
     }
 }

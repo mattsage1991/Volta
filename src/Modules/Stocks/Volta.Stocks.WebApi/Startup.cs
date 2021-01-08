@@ -34,17 +34,7 @@ namespace Volta.Stocks.WebApi
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddHealthChecks();
-            services.AddHttpClient();
-            //services.AddMediatR(typeof(CreateStockCommand));
             services.AddHostedService<TimedHostedService>();
-            //services.AddDbContext<StockDbContext>(options =>
-            //{
-            //    options.UseSqlServer(Configuration.GetConnectionString("Stocks"));
-            //});
-            //services.AddScoped<IUnitOfWork, UnitOfWork<StockDbContext>>();
-            //services.AddHttpClient<IStockLookup, IEXCloudService>();
-            //services.AddScoped<IStockRepository, StockRepository>();
-            //services.AddTransient<IRequestExecutor, RequestExecutor>();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -65,15 +55,22 @@ namespace Volta.Stocks.WebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //migrate
-                //var dbContext = app.ApplicationServices.GetService<StockDbContext>();
-                //dbContext?.Database.Migrate();
+            }
+
+            //migrate
+            var container = app.ApplicationServices.GetRequiredService<ILifetimeScope>();
+            using var scope = container.BeginLifetimeScope();
+            var dbContext = scope.Resolve<StocksContext>();
+
+            if (dbContext.Database.IsSqlServer())
+            {
+                dbContext.Database.Migrate();
             }
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Stocks Service");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Stock API");
             });
 
             app.UseRouting();

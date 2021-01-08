@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Volta.BuildingBlocks.Application.Behaviors
 {
-    public class UnitOfWorkTransactionBehavior<TRequest, TResponse, T> : IPipelineBehavior<TRequest, TResponse>
+    public class UnitOfWorkTransactionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : ICommand
     {
         private readonly ILogger<TRequest> logger;
