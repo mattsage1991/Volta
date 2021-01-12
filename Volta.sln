@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Stocks.WebApi", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{237002D8-3CFA-4CE7-81D8-BF212996A15B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Stocks.Domain.UnitTests", "src\Modules\Stocks\Tests\Volta.Stocks.Tests.UnitTests\Volta.Stocks.Domain.UnitTests.csproj", "{B6742D7F-D05E-4C38-976E-C841A04233D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Stocks.Domain.UnitTests", "src\Modules\Stocks\Volta.Stocks.Domain.UnitTests\Volta.Stocks.Domain.UnitTests.csproj", "{B6742D7F-D05E-4C38-976E-C841A04233D0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Customers.Domain.Tests", "src\Modules\Customers\Volta.Customers.Domain.Tests\Volta.Customers.Domain.Tests.csproj", "{8D93128F-AB16-4AAC-A069-268146DA0DD2}"
 EndProject
