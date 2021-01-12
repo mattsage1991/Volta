@@ -3,6 +3,7 @@ using Autofac;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volta.BuildingBlocks.Infrastructure;
+using Volta.BuildingBlocks.Infrastructure.EntityFramework;
 using Volta.Stocks.Infrastructure;
 
 namespace Volta.Stocks.Integration.Core.Setup

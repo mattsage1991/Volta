@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Volta.BuildingBlocks.Application.EventBus;
 using Volta.BuildingBlocks.Domain.Events;
-using Volta.Stocks.Application.IntegrationEvents.Events;
+using Volta.BuildingBlocks.EventBus.IntegrationEventLog.Services;
 using Volta.Stocks.Domain.Stocks.Events;
+using Volta.Stocks.IntegrationEvents;
 
 namespace Volta.Stocks.Application.EventHandlers
 {
     public class StockCreatedDomainEventHandler : IDomainEventHandler<StockCreatedDomainEvent>
     {
-        private readonly IIntegrationEventService _integrationEventService;
+        private readonly IIntegrationEventPublisher eventPublisher;
 
-        public StockCreatedDomainEventHandler(IIntegrationEventService integrationEventService)
+        public StockCreatedDomainEventHandler(IIntegrationEventPublisher eventPublisher)
         {
-            _integrationEventService = integrationEventService ?? throw new ArgumentNullException(nameof(integrationEventService));
+            this.eventPublisher = eventPublisher;
         }
 
         public async Task Handle(StockCreatedDomainEvent notification, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await eventPublisher.Publish(new StockCreatedIntegrationEvent(notification.StockId.Value,
+                notification.CompanyName.Value,
+                notification.TickerSymbol.Value));
         }
     }
 }

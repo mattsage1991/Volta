@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volta.BuildingBlocks.Infrastructure;
+using Volta.BuildingBlocks.Infrastructure.EntityFramework;
 using Volta.Stocks.Domain.Stocks;
 
 namespace Volta.Stocks.Infrastructure

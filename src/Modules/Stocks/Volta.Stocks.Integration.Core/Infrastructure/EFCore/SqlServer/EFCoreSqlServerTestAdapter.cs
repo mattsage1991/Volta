@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.DependencyInjection;
 using Volta.BuildingBlocks.Infrastructure;
+using Volta.BuildingBlocks.Infrastructure.EntityFramework;
 using Volta.Stocks.Integration.Core.Common;
 using Volta.Stocks.Integration.Core.Common.Interfaces;
 using Volta.Stocks.Integration.Core.Setup;

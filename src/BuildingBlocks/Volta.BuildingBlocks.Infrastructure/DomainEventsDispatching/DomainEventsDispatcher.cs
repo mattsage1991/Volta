@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Volta.BuildingBlocks.Infrastructure.DomainEventsAccessing;
 
 namespace Volta.BuildingBlocks.Infrastructure.DomainEventsDispatching
 {
