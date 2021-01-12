@@ -1,0 +1,20 @@
+﻿using System;
+
+namespace Volta.Stocks.Application.Setup
+{
+    public class SqlConnectionString
+    {
+
+        public string ConnectionString { get; }
+
+        public SqlConnectionString(string connectionString)
+        {
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                throw new ArgumentException($"'{nameof(connectionString)}' cannot be null or whitespace", nameof(connectionString));
+            }
+
+            ConnectionString = connectionString;
+        }
+    }
+}
