@@ -24,6 +24,8 @@ namespace Volta.BuildingBlocks.Application.Behaviors
 
             logger.LogInformation("Begin Transaction: {Name} {@Request}", name, request);
 
+            await unitOfWork.BeginTransaction();
+
             var response = await next();
 
             logger.LogInformation("Completing Transaction: {Name} {@Request}", name, request);

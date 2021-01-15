@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Volta.BuildingBlocks.Infrastructure\Volta.BuildingBlocks.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="InternalCommands\" />
+  </ItemGroup>
+
 </Project>

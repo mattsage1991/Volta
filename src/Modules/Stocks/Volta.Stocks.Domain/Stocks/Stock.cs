@@ -39,7 +39,9 @@ namespace Volta.Stocks.Domain.Stocks
 
         public static async Task<Stock> Create(CompanyName companyName, TickerSymbol tickerSymbol, IStockLookup stockLookup)
         {
-            var liveStockData = await stockLookup.GetLiveStockData(tickerSymbol).ConfigureAwait(false);
+            var liveStockData = LiveStockData.Of(MarketCap.Of(1), PeRatio.Of(1), PegRatio.Of(1),
+                PriceToBookRatio.Of(1), ProfitMargin.Of(1), TotalRevenue.Of(1),
+                DividendYield.Of(1)); /*await stockLookup.GetLiveStockData(tickerSymbol).ConfigureAwait(false);*/
 
             return new Stock(companyName, tickerSymbol, liveStockData.MarketCap, liveStockData.PeRatio, liveStockData.PegRatio, 
                 liveStockData.PriceToBookRatio, liveStockData.ProfitMargin, liveStockData.TotalRevenue, liveStockData.DividendYield);

@@ -10,17 +10,16 @@ using Volta.Stocks.Infrastructure;
 namespace Volta.Stocks.Infrastructure.Migrations
 {
     [DbContext(typeof(StocksContext))]
-    [Migration("20210108161159_Initial")]
+    [Migration("20210115163815_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("Volta.Stocks")
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0");
+                .HasAnnotation("ProductVersion", "5.0.1");
 
             modelBuilder.Entity("Volta.Stocks.Domain.Stocks.Stock", b =>
                 {

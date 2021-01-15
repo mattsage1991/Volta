@@ -7,12 +7,8 @@ namespace Volta.Stocks.Infrastructure.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                name: "Volta.Stocks");
-
             migrationBuilder.CreateTable(
                 name: "Stocks",
-                schema: "Volta.Stocks",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -35,8 +31,7 @@ namespace Volta.Stocks.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Stocks",
-                schema: "Volta.Stocks");
+                name: "Stocks");
         }
     }
 }

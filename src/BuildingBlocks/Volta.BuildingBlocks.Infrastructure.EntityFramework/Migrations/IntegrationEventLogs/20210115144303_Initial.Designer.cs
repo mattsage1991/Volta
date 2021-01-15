@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volta.BuildingBlocks.Infrastructure.EntityFramework.IntegrationEventServices;
 
-namespace Volta.BuildingBlocks.Infrastructure.EntityFramework.Migrations
+namespace Volta.BuildingBlocks.Infrastructure.EntityFramework.Migrations.IntegrationEventLogs
 {
     [DbContext(typeof(IntegrationEventLogContext))]
-    partial class IntegrationEventLogContextModelSnapshot : ModelSnapshot
+    [Migration("20210115144303_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

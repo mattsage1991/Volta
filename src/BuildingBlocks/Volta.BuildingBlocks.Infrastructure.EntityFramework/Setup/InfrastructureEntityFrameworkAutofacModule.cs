@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Volta.BuildingBlocks.EventBus;
 using Volta.BuildingBlocks.EventBus.IntegrationEventLog.Services;
 using Volta.BuildingBlocks.Infrastructure.EntityFramework.IntegrationEventServices;
+using Volta.BuildingBlocks.Infrastructure.EntityFramework.InternalCommands;
 using Volta.BuildingBlocks.Infrastructure.EntityFramework.Quartz;
 using Volta.BuildingBlocks.Infrastructure.Setup;
 
@@ -46,7 +47,20 @@ namespace Volta.BuildingBlocks.Infrastructure.EntityFramework.Setup
                 return new IntegrationEventLogContext(opt.Options);
             }).AsSelf().InstancePerLifetimeScope();
 
-            
+            builder.Register(c =>
+            {
+                var opt = new DbContextOptionsBuilder<InternalCommandsContext>();
+                opt.UseSqlServer(databaseConnectionString,
+                    sqlServerOptionsAction: sqlOptions =>
+                    {
+                        sqlOptions.MigrationsAssembly(typeof(InternalCommandsContext).GetTypeInfo().Assembly.GetName().Name);
+                        //Configuring Connection Resiliency: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency 
+                        sqlOptions.EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
+                    });
+                return new InternalCommandsContext(opt.Options);
+            }).AsSelf().InstancePerLifetimeScope();
+
+
             builder.RegisterType<IntegrationEventAccessor>().AsImplementedInterfaces().InstancePerLifetimeScope();
             builder.RegisterType<IntegrationEventPublisher<TDbContext>>().AsImplementedInterfaces().InstancePerDependency();
 

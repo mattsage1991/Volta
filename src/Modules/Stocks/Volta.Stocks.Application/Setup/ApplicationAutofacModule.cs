@@ -1,9 +1,11 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using Autofac;
 using MediatR;
 using MediatR.Extensions.Autofac.DependencyInjection;
 using Volta.BuildingBlocks.Application.Behaviors;
 using Volta.BuildingBlocks.Application.Setup;
+using Volta.BuildingBlocks.EventBus;
 
 namespace Volta.Stocks.Application.Setup
 {
@@ -26,7 +28,10 @@ namespace Volta.Stocks.Application.Setup
             builder.RegisterMediatR(Assembly.GetExecutingAssembly());
 
             builder.RegisterGeneric(typeof(UnitOfWorkTransactionBehavior<,>)).As(typeof(IPipelineBehavior<,>)).InstancePerDependency();
-            
+
+            builder.Register(x => new IntegrationEventTypesProvider(ThisAssembly.GetReferencedAssemblies().Where(x => x.Name.StartsWith("Volta.")).ToArray()))
+                .SingleInstance().AsImplementedInterfaces();
+
             base.Load(builder);
         }
     }

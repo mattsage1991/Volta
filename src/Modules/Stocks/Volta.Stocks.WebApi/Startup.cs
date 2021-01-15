@@ -7,7 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Volta.BuildingBlocks.Application;
+using Volta.BuildingBlocks.EventBus.RabbitMQ.Setup;
 using Volta.BuildingBlocks.Infrastructure;
+using Volta.BuildingBlocks.Infrastructure.EntityFramework.IntegrationEventServices;
+using Volta.BuildingBlocks.Infrastructure.EntityFramework.InternalCommands;
 using Volta.Stocks.Application.Commands.CreateStock;
 using Volta.Stocks.Application.Setup;
 using Volta.Stocks.Domain.Stocks;
@@ -41,6 +44,14 @@ namespace Volta.Stocks.WebApi
         {
             builder.RegisterModule(new ApplicationAutofacModule(Configuration.GetConnectionString("StockDatabase")));
             builder.RegisterModule(new InfrastructureAutofacModule(Configuration.GetConnectionString("StockDatabase")));
+
+            builder.RegisterModule(new RabbitMQAutofacModule(
+                Configuration["EventBusRetryCount"],
+                Configuration["SubscriptionClientName"],
+                Configuration["EventBusConnection"],
+                Configuration["EventBusUserName"],
+                Configuration["EventBusPassword"]));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,11 +65,25 @@ namespace Volta.Stocks.WebApi
             //migrate
             var container = app.ApplicationServices.GetRequiredService<ILifetimeScope>();
             using var scope = container.BeginLifetimeScope();
-            var dbContext = scope.Resolve<StocksContext>();
+            var stocksContext = scope.Resolve<StocksContext>();
 
-            if (dbContext.Database.IsSqlServer())
+            if (stocksContext.Database.IsSqlServer())
             {
-                dbContext.Database.Migrate();
+                stocksContext.Database.Migrate();
+            }
+
+            var integrationEventLogContext = scope.Resolve<IntegrationEventLogContext>();
+
+            if (integrationEventLogContext.Database.IsSqlServer())
+            {
+                integrationEventLogContext.Database.Migrate();
+            }
+
+            var internalCommandsContext = scope.Resolve<InternalCommandsContext>();
+
+            if (internalCommandsContext.Database.IsSqlServer())
+            {
+                internalCommandsContext.Database.Migrate();
             }
 
             app.UseSwagger();

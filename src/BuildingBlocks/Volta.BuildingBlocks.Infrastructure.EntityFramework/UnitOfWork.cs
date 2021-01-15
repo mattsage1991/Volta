@@ -18,8 +18,8 @@ namespace Volta.BuildingBlocks.Infrastructure.EntityFramework
         private readonly IInternalIntegrationEventPublisher internalIntegrationEventPublisher;
         private IDbContextTransaction dbContextTransaction;
 
-        public UnitOfWork(T dbContext, ICurrentTransactionAccessor currentTransactionAccessor, 
-            IDomainEventsDispatcher domainEventsDispatcher, 
+        public UnitOfWork(T dbContext, ICurrentTransactionAccessor currentTransactionAccessor,
+            IDomainEventsDispatcher domainEventsDispatcher,
             IInternalIntegrationEventPublisher internalIntegrationEventPublisher)
         {
             this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));

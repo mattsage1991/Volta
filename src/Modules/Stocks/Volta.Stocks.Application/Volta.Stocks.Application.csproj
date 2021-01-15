@@ -1,11 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.78" />
     <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\Volta.BuildingBlocks.Application\Volta.BuildingBlocks.Application.csproj" />
     <ProjectReference Include="..\Volta.Stocks.Domain\Volta.Stocks.Domain.csproj" />
     <ProjectReference Include="..\Volta.Stocks.IntegrationEvents\Volta.Stocks.IntegrationEvents.csproj" />

@@ -18,10 +18,7 @@ namespace Volta.Stocks.Infrastructure
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("Volta.Stocks");
-
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(StocksContext)));
-
         }
 
         public class StockDbContextDesignFactory : IDesignTimeDbContextFactory<StocksContext>

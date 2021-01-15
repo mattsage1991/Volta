@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Volta.BuildingBlocks.Infrastructure.EntityFramework.Migrations
+namespace Volta.BuildingBlocks.Infrastructure.EntityFramework.Migrations.IntegrationEventLogs
 {
-    public partial class IntegrationEventLog : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

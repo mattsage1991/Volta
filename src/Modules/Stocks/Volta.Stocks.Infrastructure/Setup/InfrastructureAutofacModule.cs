@@ -43,9 +43,13 @@ namespace Volta.Stocks.Infrastructure.Setup
                 .Where(t => t.Name.EndsWith("Repository"))
                 .AsImplementedInterfaces().InstancePerLifetimeScope();
 
-            builder.RegisterType<IEXCloudService>().AsImplementedInterfaces().SingleInstance().WithParameter(
-                (p, ctx) => p.ParameterType == typeof(HttpClient),
-                (p, ctx) => ctx.Resolve<IHttpClientFactory>().CreateClient());
+            builder.Register(ctx => new HttpClient())
+                .Named<HttpClient>("iexcloud")
+                .SingleInstance();
+
+            builder.Register(ctx => new IEXCloudService(ctx.ResolveNamed<HttpClient>("iexcloud")))
+                .AsImplementedInterfaces()
+                .SingleInstance();
             
             base.Load(builder);
         }

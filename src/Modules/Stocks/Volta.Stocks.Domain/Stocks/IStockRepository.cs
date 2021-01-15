@@ -6,5 +6,7 @@ namespace Volta.Stocks.Domain.Stocks
     public interface IStockRepository
     {
         Task Add(Stock stock, CancellationToken cancellationToken = default);
+
+        Task<Stock> GetById(StockId id, CancellationToken cancellationToken = default);
     }
 }
