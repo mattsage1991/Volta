@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Moq;
 using Volta.Stocks.Domain.Stocks;
 using Volta.Stocks.Domain.Stocks.Events;
+using Volta.Stocks.Domain.Stocks.Rules;
 using Volta.Stocks.Domain.Stocks.Services;
 using Volta.Stocks.Domain.UnitTests.SeedWork;
 using Xunit;
@@ -20,15 +22,16 @@ namespace Volta.Stocks.Domain.UnitTests.Stocks
         }
 
         [Fact]
-        public async void CreateStock_WhenValidParameters_ShouldSucceedAndRaiseStockCreatedDomainEvent()
+        public void CreateStock_WhenValidParameters_ShouldSucceedAndRaiseStockCreatedDomainEvent()
         {
             // Arrange
             var companyName = CompanyName.Of("valid");
             var tickerSymbol = TickerSymbol.Of("valid");
             var stockLookup = harness.StockLookup;
+            var stockExistsChecker = harness.AlwaysFalseStockExistsChecker;
 
             // Act 
-            var stock = await Stock.Create(companyName, tickerSymbol, stockLookup);
+            var stock = Stock.Create(companyName, tickerSymbol, stockExistsChecker, stockLookup);
 
             // Assert
             using var _ = new AssertionScope();
@@ -40,32 +43,51 @@ namespace Volta.Stocks.Domain.UnitTests.Stocks
         }
 
         [Fact]
-        public async void UpdateStock_WhenValuesHaveNotChanged_ShouldSucceedAndNotRaiseDomainEvents()
+        public void CreateStock_WhenStockAlreadyExists_ShouldSucceedAndRaiseStockCreatedDomainEvent()
         {
             // Arrange
             var companyName = CompanyName.Of("valid");
             var tickerSymbol = TickerSymbol.Of("valid");
             var stockLookup = harness.StockLookup;
+            var stockExistsChecker = harness.AlwaysTrueStockExistsChecker;
 
-            var stock = await Stock.Create(companyName, tickerSymbol, stockLookup);
+            // Act 
+            Action act = () => Stock.Create(companyName, tickerSymbol, stockExistsChecker, stockLookup);
+
+            // Assert
+            AssertBrokenRule<StockMustNotExistRule>(act);
+
+        }
+
+        [Fact]
+        public void UpdateStock_WhenValuesHaveNotChanged_ShouldSucceedAndNotRaiseDomainEvents()
+        {
+            // Arrange
+            var companyName = CompanyName.Of("valid");
+            var tickerSymbol = TickerSymbol.Of("valid");
+            var stockLookup = harness.StockLookup;
+            var stockExistsChecker = harness.AlwaysFalseStockExistsChecker;
+
+            var stock = Stock.Create(companyName, tickerSymbol, stockExistsChecker, stockLookup);
             stock.ClearDomainEvents();
 
             // Act
             stock.Update(stockLookup);
 
             // Assert
-            DomainEventsTestHelper.GetAllDomainEvents(stock).Should().BeEmpty();
+            DomainEventsTestHelper.GetAllDomainEvents(stock).Should().ContainSingle();
         }
 
         [Fact]
-        public async void UpdateStock_WhenValuesHaveChanged_ShouldSucceedAndRaiseDomainEvents()
+        public void UpdateStock_WhenValuesHaveChanged_ShouldSucceedAndRaiseDomainEvents()
         {
             // Arrange
             var companyName = CompanyName.Of("valid");
             var tickerSymbol = TickerSymbol.Of("valid");
             var stockLookup = harness.StockLookup;
+            var stockExistsChecker = harness.AlwaysFalseStockExistsChecker;
 
-            var stock = await Stock.Create(companyName, tickerSymbol, stockLookup);
+            var stock = Stock.Create(companyName, tickerSymbol, stockExistsChecker, stockLookup);
             stock.ClearDomainEvents();
 
             var updatedStockData = LiveStockData.Of(
@@ -113,6 +135,10 @@ namespace Volta.Stocks.Domain.UnitTests.Stocks
             var dividendYieldDomainEvent = AssertPublishedDomainEvent<StockDividendYieldChangedDomainEvent>(stock);
             dividendYieldDomainEvent.DividendYield.Should().Be(updatedStockData.DividendYield);
             dividendYieldDomainEvent.StockId.Should().Be(stock.Id);
+
+            var lastUpdatedDateDomainEvent = AssertPublishedDomainEvent<StockLastUpdatedDateChangedDomainEvent>(stock);
+            lastUpdatedDateDomainEvent.LastUpdatedDate.Date.Should().Be(DateTime.UtcNow.Date);
+            lastUpdatedDateDomainEvent.StockId.Should().Be(stock.Id);
         }
 
     }

@@ -1,20 +1,16 @@
 ﻿using System;
-using Newtonsoft.Json;
+using MediatR;
 using Volta.BuildingBlocks.Application;
 
 namespace Volta.Stocks.Application.Commands.UpdateStock
 {
-    public class UpdateStockCommand : InternalCommandBase
+    public class UpdateStockCommand : ICommand<Unit>
     {
-        public Guid StockId { get; }
-
-        [JsonConstructor]
-        public UpdateStockCommand(
-            Guid id,
-            Guid stockId)
-            : base(id)
+        public UpdateStockCommand(Guid stockId)
         {
             StockId = stockId;
         }
+
+        public Guid StockId { get; }
     }
 }

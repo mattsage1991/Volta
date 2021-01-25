@@ -6,9 +6,6 @@ namespace Volta.BuildingBlocks.Application
 {
     public interface IUnitOfWork
     {
-        Task<Guid> BeginTransaction();
-        object GetCurrentTransaction();
-        Task Complete(CancellationToken cancellationToken = default);
-
+        Task<int> Complete(CancellationToken cancellationToken = default);
     }
 }

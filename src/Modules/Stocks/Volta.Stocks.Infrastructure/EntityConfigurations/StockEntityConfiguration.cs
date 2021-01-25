@@ -56,6 +56,8 @@ namespace Volta.Stocks.Infrastructure.EntityConfigurations
                 b.Property(x => x.Value).HasColumnName("DividendYield");
             });
 
+            builder.Property("lastUpdatedDate").HasColumnName("LastUpdatedDate");
+            
             builder.Ignore(x => x.DomainEvents);
         }
     }

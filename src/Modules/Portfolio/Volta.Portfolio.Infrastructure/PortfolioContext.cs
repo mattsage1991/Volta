@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Volta.Portfolios.Domain.Portfolios;
 using Volta.Portfolios.Infrastructure.Domain.Portfolios;
+using Volta.Portfolios.Infrastructure.EntityConfigurations;
 
 namespace Volta.Portfolios.Infrastructure
 {
@@ -15,10 +16,10 @@ namespace Volta.Portfolios.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new PortfolioEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new PortfolioEntityConfiguration());
         }
 
-        public class OrderingContextDesignFactory : IDesignTimeDbContextFactory<PortfolioContext>
+        public class PortfolioContextDesignFactory : IDesignTimeDbContextFactory<PortfolioContext>
         {
             public PortfolioContext CreateDbContext(string[] args)
             {

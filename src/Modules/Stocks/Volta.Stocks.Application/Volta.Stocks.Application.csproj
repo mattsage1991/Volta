@@ -13,7 +13,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\Volta.BuildingBlocks.Application\Volta.BuildingBlocks.Application.csproj" />
     <ProjectReference Include="..\Volta.Stocks.Domain\Volta.Stocks.Domain.csproj" />
-    <ProjectReference Include="..\Volta.Stocks.IntegrationEvents\Volta.Stocks.IntegrationEvents.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="EventHandlers\" />
   </ItemGroup>
 
 </Project>

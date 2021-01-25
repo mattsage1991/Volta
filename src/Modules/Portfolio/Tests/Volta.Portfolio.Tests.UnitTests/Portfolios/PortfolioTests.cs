@@ -1,40 +1,32 @@
 ﻿using System;
+using FluentAssertions;
+using FluentAssertions.Execution;
 using Volta.Portfolios.Domain.Portfolios;
 using Volta.Portfolios.Domain.Portfolios.Events;
-using Volta.Portfolios.Domain.Portfolios.Rules;
-using Volta.Portfolios.Domain.Stocks;
+using Volta.Portfolios.Tests.UnitTests.SeedWork;
 using Xunit;
 
-namespace Volta.Portfolios.Tests.UnitTests.Portfolios
+namespace Volta.Portfolios.Domain.UnitTests.Portfolios
 {
-    public class PortfolioTests : PortfolioTestsBase
+    public class PortfolioTests : TestBase
     {
-        //[Fact]
-        //public void RemoveHolding_WhenStockExistsInPortfolio_IsSuccessful()
-        //{
-        //    var portfolioTestData = CreatePortfolioTestData(new HoldingTestDataOptions());
-
-        //    var holdingToRemoveId = new HoldingId(Guid.NewGuid());
-        //    portfolioTestData.Portfolio.AddHolding(holdingToRemoveId, MoneyValue.Of(10,"gbp"), 1);
-
-        //    portfolioTestData.Portfolio.RemoveHolding(holdingToRemoveId);
-
-        //    var portfolioHoldingRemoved = AssertPublishedDomainEvent<PortfolioHoldingRemovedDomainEvent>(portfolioTestData.Portfolio);
-        //    Assert.That(portfolioHoldingRemoved.HoldingId, Is.EqualTo(holdingToRemoveId));
-        //    Assert.That(portfolioHoldingRemoved.PortfolioId, Is.EqualTo(portfolioTestData.Portfolio.Id));
-        //}
-
         [Fact]
-        public void RemoveHolding_WhenStockIsNotActiveInPortfolio_BreaksOnlyExistingHoldingCanBeRemovedFromPortfolioRule()
+        public void CreatePortfolio_WhenValidParameters_ShouldSucceedAndRaisePortfolioCreatedDomainEvent()
         {
-            var portfolioTestData = CreatePortfolioTestData(new HoldingTestDataOptions());
+            // Arrange
+            var memberId = MemberId.Of(Guid.NewGuid());
+            var portfolioName = PortfolioName.Of("name");
 
-            var holdingToRemoveId = new HoldingId(Guid.NewGuid());
+            // Act
+            var portfolio = Portfolio.Create(memberId, portfolioName);
 
-            AssertBrokenRule<OnlyActiveHoldingCanBeRemovedFromPortfolioRule>(() =>
-            {
-                portfolioTestData.Portfolio.RemoveHolding(holdingToRemoveId);
-            });
+            // Assert
+            using var _ = new AssertionScope();
+
+            var domainEvent = AssertPublishedDomainEvent<PortfolioCreatedDomainEvent>(portfolio);
+            domainEvent.PortfolioId.Should().Be(portfolio.Id);
+            domainEvent.PortfolioName.Should().Be(portfolioName);
+            domainEvent.MemberId.Should().Be(memberId);
         }
     }
 }

@@ -28,24 +28,25 @@ namespace Volta.BuildingBlocks.Infrastructure.EntityFramework.Setup
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterModule(new InfrastructureAutofacModule());
-            builder.RegisterModule(new QuartzModule());
+            //builder.RegisterModule(new QuartzModule());
 
             builder.RegisterType<DomainEventsAccessor<TDbContext>>().AsImplementedInterfaces().InstancePerDependency();
             builder.RegisterType<UnitOfWork<TDbContext>>().AsImplementedInterfaces().InstancePerLifetimeScope();
-            builder.RegisterType<CurrentTransactionAccessor>().AsImplementedInterfaces().InstancePerLifetimeScope();
 
-            builder.Register(c =>
-            {
-                var opt = new DbContextOptionsBuilder<IntegrationEventLogContext>();
-                opt.UseSqlServer(databaseConnectionString,
-                     sqlServerOptionsAction: sqlOptions =>
-                     {
-                         sqlOptions.MigrationsAssembly(typeof(IntegrationEventLogContext).GetTypeInfo().Assembly.GetName().Name);
-                         //Configuring Connection Resiliency: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency 
-                         sqlOptions.EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
-                     });
-                return new IntegrationEventLogContext(opt.Options);
-            }).AsSelf().InstancePerLifetimeScope();
+            //builder.RegisterType<CurrentTransactionAccessor>().AsImplementedInterfaces().InstancePerLifetimeScope();
+
+            //builder.Register(c =>
+            //{
+            //    var opt = new DbContextOptionsBuilder<IntegrationEventLogContext>();
+            //    opt.UseSqlServer(databaseConnectionString,
+            //         sqlServerOptionsAction: sqlOptions =>
+            //         {
+            //             sqlOptions.MigrationsAssembly(typeof(IntegrationEventLogContext).GetTypeInfo().Assembly.GetName().Name);
+            //             //Configuring Connection Resiliency: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency 
+            //             sqlOptions.EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
+            //         });
+            //    return new IntegrationEventLogContext(opt.Options);
+            //}).AsSelf().InstancePerLifetimeScope();
 
             builder.Register(c =>
             {
@@ -61,14 +62,14 @@ namespace Volta.BuildingBlocks.Infrastructure.EntityFramework.Setup
             }).AsSelf().InstancePerLifetimeScope();
 
 
-            builder.RegisterType<IntegrationEventAccessor>().AsImplementedInterfaces().InstancePerLifetimeScope();
-            builder.RegisterType<IntegrationEventPublisher<TDbContext>>().AsImplementedInterfaces().InstancePerDependency();
+            //builder.RegisterType<IntegrationEventAccessor>().AsImplementedInterfaces().InstancePerLifetimeScope();
+            //builder.RegisterType<IntegrationEventPublisher<TDbContext>>().AsImplementedInterfaces().InstancePerDependency();
 
-            builder.Register<Func<DbConnection, IIntegrationEventLogService>>(sp =>
-            {
-                var integrationEventProvider = sp.Resolve<IIntegrationEventTypesProvider>();
-                return (DbConnection c) => new IntegrationEventLogService(integrationEventProvider, c);
-            });
+            //builder.Register<Func<DbConnection, IIntegrationEventLogService>>(sp =>
+            //{
+            //    var integrationEventProvider = sp.Resolve<IIntegrationEventTypesProvider>();
+            //    return (DbConnection c) => new IntegrationEventLogService(integrationEventProvider, c);
+            //});
 
             base.Load(builder);
         }

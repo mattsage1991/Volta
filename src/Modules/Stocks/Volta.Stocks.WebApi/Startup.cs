@@ -45,12 +45,12 @@ namespace Volta.Stocks.WebApi
             builder.RegisterModule(new ApplicationAutofacModule(Configuration.GetConnectionString("StockDatabase")));
             builder.RegisterModule(new InfrastructureAutofacModule(Configuration.GetConnectionString("StockDatabase")));
 
-            builder.RegisterModule(new RabbitMQAutofacModule(
-                Configuration["EventBusRetryCount"],
-                Configuration["SubscriptionClientName"],
-                Configuration["EventBusConnection"],
-                Configuration["EventBusUserName"],
-                Configuration["EventBusPassword"]));
+            //builder.RegisterModule(new RabbitMQAutofacModule(
+            //    Configuration["EventBusRetryCount"],t
+            //    Configuration["SubscriptionClientName"],
+            //    Configuration["EventBusConnection"],
+            //    Configuration["EventBusUserName"],
+            //    Configuration["EventBusPassword"]));
 
         }
 
@@ -71,21 +71,7 @@ namespace Volta.Stocks.WebApi
             {
                 stocksContext.Database.Migrate();
             }
-
-            var integrationEventLogContext = scope.Resolve<IntegrationEventLogContext>();
-
-            if (integrationEventLogContext.Database.IsSqlServer())
-            {
-                integrationEventLogContext.Database.Migrate();
-            }
-
-            var internalCommandsContext = scope.Resolve<InternalCommandsContext>();
-
-            if (internalCommandsContext.Database.IsSqlServer())
-            {
-                internalCommandsContext.Database.Migrate();
-            }
-
+            
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

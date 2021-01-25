@@ -1,42 +1,43 @@
 ﻿using System;
+using FluentAssertions;
+using FluentAssertions.Execution;
 using Volta.Portfolios.Domain.Portfolios;
 using Volta.Portfolios.Domain.Portfolios.Events;
-using Volta.Portfolios.Domain.Portfolios.Rules;
 using Volta.Portfolios.Domain.Stocks;
+using Volta.Portfolios.Tests.UnitTests.SeedWork;
 using Xunit;
 
-namespace Volta.Portfolios.Tests.UnitTests.Portfolios
+namespace Volta.Portfolios.Domain.UnitTests.Portfolios
 {
-    public class PortfolioAddHoldingTests : PortfolioTestsBase
+    public class PortfolioAddHoldingTests : TestBase
     {
-        [Fact]
-        public void WhenHoldingAlreadyExistsInPortfolio_IsNotPossible()
+        private TestHarness harness;
+
+        public PortfolioAddHoldingTests()
         {
-            var portfolioTestData = CreatePortfolioTestData(new HoldingTestDataOptions());
-
-            var newHoldingId = new HoldingId(Guid.NewGuid());
-            portfolioTestData.Portfolio.AddHolding(newHoldingId, MoneyValue.Undefined, 0);
-
-            AssertBrokenRule<StockCannotBeAHoldingOfPortfolioMoreThanOnce>(() =>
-            {
-                portfolioTestData.Portfolio.AddHolding(newHoldingId, MoneyValue.Undefined,  0);
-            });
+            harness = new TestHarness();
         }
 
+        [Fact]
+        public void AddHolding_WhenAllConditionsAllowsNewHolding_IsSuccessful()
+        {
+            // Arrange
+            var portfolio = harness.CreatePortfolio();
+            var stockId = new StockId(Guid.NewGuid());
+            var averageCost = AverageCost.Of(MoneyValue.Of(10, "USD"));
+            var numberOfShares = NumberOfShares.Of(100);
 
-        //[Fact]
-        //public void WhenAllConditionsAllowsNewHolding_IsSuccessful()
-        //{
-        //    var portfolioTestData = CreatePortfolioTestData(new HoldingTestDataOptions());
+            // Act
+            portfolio.AddHolding(stockId, averageCost, numberOfShares);
 
-        //    var newHoldingId = new HoldingId(Guid.NewGuid());
+            //Assert
+            using var _ = new AssertionScope();
 
-        //    portfolioTestData.Portfolio.AddHolding(newHoldingId, MoneyValue.Of(1000,"gbp"), 10);
-
-        //    var portfolioHoldingsAddedEvents =
-        //        AssertPublishedDomainEvent<PortfolioHoldingAddedDomainEvent>(portfolioTestData.Portfolio);
-
-        //    Assert.That(portfolioHoldingsAddedEvents.HoldingId, Is.EqualTo(newHoldingId));
-        //}
+            var domainEvent = AssertPublishedDomainEvent<PortfolioHoldingAddedDomainEvent>(portfolio);
+            domainEvent.PortfolioId.Should().Be(portfolio.Id);
+            domainEvent.StockId.Should().Be(stockId);
+            domainEvent.AverageCost.Should().Be(averageCost);
+            domainEvent.NumberOfShares.Should().Be(numberOfShares);
+        }
     }
 }

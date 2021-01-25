@@ -24,6 +24,10 @@ namespace Volta.Stocks.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("lastUpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastUpdatedDate");
+
                     b.HasKey("Id");
 
                     b.ToTable("Stocks");
@@ -48,14 +52,14 @@ namespace Volta.Stocks.Infrastructure.Migrations
                                 .HasForeignKey("StockId");
                         });
 
-                    b.OwnsOne("Volta.Stocks.Domain.Stocks.DividendYield", "dividendYield", b1 =>
+                    b.OwnsOne("Volta.Stocks.Domain.Stocks.LastUpdatedDate", "dividendYield", b1 =>
                         {
                             b1.Property<Guid>("StockId")
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<decimal?>("Value")
                                 .HasColumnType("decimal(18,2)")
-                                .HasColumnName("DividendYield");
+                                .HasColumnName("LastUpdatedDate");
 
                             b1.HasKey("StockId");
 

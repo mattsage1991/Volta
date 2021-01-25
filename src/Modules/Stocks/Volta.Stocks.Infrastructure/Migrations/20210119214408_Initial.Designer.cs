@@ -10,7 +10,7 @@ using Volta.Stocks.Infrastructure;
 namespace Volta.Stocks.Infrastructure.Migrations
 {
     [DbContext(typeof(StocksContext))]
-    [Migration("20210115163815_Initial")]
+    [Migration("20210119214408_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,10 @@ namespace Volta.Stocks.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("lastUpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("LastUpdatedDate");
 
                     b.HasKey("Id");
 
@@ -50,14 +54,14 @@ namespace Volta.Stocks.Infrastructure.Migrations
                                 .HasForeignKey("StockId");
                         });
 
-                    b.OwnsOne("Volta.Stocks.Domain.Stocks.DividendYield", "dividendYield", b1 =>
+                    b.OwnsOne("Volta.Stocks.Domain.Stocks.LastUpdatedDate", "dividendYield", b1 =>
                         {
                             b1.Property<Guid>("StockId")
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<decimal?>("Value")
                                 .HasColumnType("decimal(18,2)")
-                                .HasColumnName("DividendYield");
+                                .HasColumnName("LastUpdatedDate");
 
                             b1.HasKey("StockId");
 

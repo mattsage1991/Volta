@@ -12,6 +12,7 @@ namespace Volta.Stocks.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LastUpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DividendYield = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     MarketCap = table.Column<long>(type: "bigint", nullable: true),

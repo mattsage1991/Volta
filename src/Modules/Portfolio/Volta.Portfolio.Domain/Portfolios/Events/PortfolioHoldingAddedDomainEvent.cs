@@ -6,27 +6,17 @@ namespace Volta.Portfolios.Domain.Portfolios.Events
 {
     public class PortfolioHoldingAddedDomainEvent : DomainEvent
     {
-        public PortfolioHoldingAddedDomainEvent(
-            PortfolioId portfolioId, 
-            HoldingId holdingId,
-            DateTime addedDate,
-            decimal? sharePriceValue,
-            string sharePriceCurrency,
-            int quantity)
+        public PortfolioId PortfolioId { get; set; }
+        public StockId StockId { get; set; }
+        public AverageCost AverageCost { get; set; }
+        public NumberOfShares NumberOfShares { get; set; }
+
+        public PortfolioHoldingAddedDomainEvent(PortfolioId portfolioId, StockId stockId, AverageCost averageCost, NumberOfShares numberOfShares)
         {
             PortfolioId = portfolioId;
-            HoldingId = holdingId;
-            AddedDate = addedDate;
-            SharePriceValue = sharePriceValue;
-            SharePriceCurrency = sharePriceCurrency;
-            Quantity = quantity;
+            StockId = stockId;
+            AverageCost = averageCost;
+            NumberOfShares = numberOfShares;
         }
-
-        public PortfolioId PortfolioId { get; set; }
-        public HoldingId HoldingId { get; set; }
-        public DateTime AddedDate { get; set; }
-        public decimal? SharePriceValue { get; set; }
-        public string SharePriceCurrency { get; set; }
-        public int Quantity { get; set; }
     }
 }

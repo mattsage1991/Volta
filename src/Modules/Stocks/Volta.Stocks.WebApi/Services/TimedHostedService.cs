@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Volta.BuildingBlocks.Application;
-using Volta.Stocks.Application.Commands.CreateStock;
-using Volta.Stocks.Application.Commands.UpdateStocks;
+using Volta.Stocks.Application.Commands.UpdateStock;
+using Volta.Stocks.Application.Queries.GetStocksToBeUpdated;
 
 namespace Volta.Stocks.WebApi.Services
 {
@@ -35,8 +35,16 @@ namespace Volta.Stocks.WebApi.Services
         private async void DoWork(object state)
         {
             logger.LogInformation("Timed Background Service is working.");
-            var numberOfStocksUpdated = await requestExecutor.ExecuteCommand(new UpdateStocksCommand());
-            logger.LogInformation($"{numberOfStocksUpdated} stocks have been updated.");
+
+            // query all stock by last updated date
+            var stocks = await requestExecutor.ExecuteQuery(new GetStocksToBeUpdatedQuery());
+
+            // foreach stock command per stock
+            foreach (var stock in stocks)
+            {
+                await requestExecutor.ExecuteCommand(new UpdateStockCommand(stock.Id));
+                logger.LogInformation($"{stock.CompanyName} live data has been updated.");
+            }
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

@@ -61,12 +61,12 @@ namespace Volta.Stocks.WebApi.IntegrationTests.Controllers
                 var context = (StocksContext)checkers.Single(x => x.CheckType == EFCoreTestCheckType.Instance).GetCheckObject();
 
                 // Verify the data written to the datastore is correct.
-                var sqlQuery = $"SELECT * FROM [Volta.Stocks].Stocks WHERE CompanyName = '{request.CompanyName}' " +
+                var sqlQuery = $"SELECT * FROM [Stocks].[dbo].[Stocks] WHERE CompanyName = '{request.CompanyName}' " +
                                $"AND TickerSymbol = '{request.TickerSymbol}' ";
 
-                var customer1 = await context.Stocks.FromSqlRaw(sqlQuery).FirstOrDefaultAsync().ConfigureAwait(false);
-                customer1.Should().NotBeNull().And.BeAssignableTo<Stock>();
-                customer1.Id.Value.Should().NotBeEmpty().And.NotBe(default(Guid));
+                var stock = await context.Stocks.FromSqlRaw(sqlQuery).FirstOrDefaultAsync().ConfigureAwait(false);
+                stock.Should().NotBeNull().And.BeAssignableTo<Stock>();
+                stock.Id.Value.Should().NotBeEmpty().And.NotBe(default(Guid));
 
             }).ConfigureAwait(false);
         }

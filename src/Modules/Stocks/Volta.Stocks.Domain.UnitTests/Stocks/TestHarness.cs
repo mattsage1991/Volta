@@ -17,6 +17,26 @@ namespace Volta.Stocks.Domain.UnitTests.Stocks
             }
         }
 
+        public IStockExistsChecker AlwaysFalseStockExistsChecker
+        {
+            get
+            {
+                var stockExistsChecker = new Mock<IStockExistsChecker>();
+                stockExistsChecker.Setup(x => x.Exists(It.IsAny<CompanyName>())).Returns(Task.FromResult(false));
+                return stockExistsChecker.Object;
+            }
+        }
+
+        public IStockExistsChecker AlwaysTrueStockExistsChecker
+        {
+            get
+            {
+                var stockExistsChecker = new Mock<IStockExistsChecker>();
+                stockExistsChecker.Setup(x => x.Exists(It.IsAny<CompanyName>())).Returns(Task.FromResult(true));
+                return stockExistsChecker.Object;
+            }
+        }
+
         private LiveStockData CreateLiveStockData()
         {
             var stockData = LiveStockData.Of(

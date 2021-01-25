@@ -1,53 +1,62 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Volta.BuildingBlocks.Domain;
 using Volta.BuildingBlocks.Domain.Entities;
-using Volta.Portfolios.Domain.Members;
+using Volta.BuildingBlocks.Domain.Events;
+using Volta.Portfolios.Domain.Portfolios.Events;
 using Volta.Portfolios.Domain.Portfolios.Rules;
 using Volta.Portfolios.Domain.Stocks;
 
 namespace Volta.Portfolios.Domain.Portfolios
 {
-    public class Portfolio : Entity<PortfolioId>
+    public class Portfolio : Entity<PortfolioId>, IAggregateRoot
     {
-        public MemberId MemberId { get; }
+        private MemberId memberId;
+        private PortfolioName name;
+        private DateTime createdDate;
+
+        private List<Holding> holdings;
+
+        private Portfolio()
+        {
+            holdings = new();
+        }
         
-        public Portfolio(PortfolioId id, MemberId memberId, string name)
+        private Portfolio(MemberId memberId, PortfolioName name)
         {
-            Id = id;
-            MemberId = memberId;
-            _name = name;
-            _createDate = DateTime.UtcNow;
-            _holdings = new List<PortfolioHolding>();
+            Id = new PortfolioId(Guid.NewGuid());
+            this.memberId = memberId;
+            this.name = name;
+            this.createdDate = DateTime.UtcNow;
+
+            AddDomainEvent(new PortfolioCreatedDomainEvent(this.Id, this.memberId, this.name, this.createdDate));
         }
 
-        public void AddHolding(HoldingId holdingId, MoneyValue averagePrice, int shareQuantity)
+        public static Portfolio Create(MemberId memberId, PortfolioName name)
         {
-            CheckRule(new StockCannotBeAHoldingOfPortfolioMoreThanOnce(holdingId, _holdings));
-
-            _holdings.Add(PortfolioHolding.Create(
-                Id, 
-                holdingId,
-                DateTime.UtcNow,
-                shareQuantity,
-                averagePrice
-                ));
+            return new Portfolio(memberId, name);
         }
 
-        public void RemoveHolding(HoldingId holdingId)
+        public HoldingId AddHolding(StockId stockId, AverageCost averageCost, NumberOfShares numberOfShares)
         {
-            CheckRule(new OnlyActiveHoldingCanBeRemovedFromPortfolioRule(holdingId, _holdings));
+            holdings ??= new List<Holding>();
 
-            var holding = _holdings.Single(x => x.HoldingId == holdingId);
+            CheckRule(new StockCannotBeAHoldingOfPortfolioMoreThanOnce(stockId, holdings));
+
+            var holding = Holding.Create(stockId, averageCost, numberOfShares);
+            holdings.Add(holding);
+
+            AddDomainEvent(new PortfolioHoldingAddedDomainEvent(this.Id, stockId, averageCost, numberOfShares));
+            return holding.Id;
+        }
+        
+        public void RemoveHolding(StockId stockId)
+        {
+            CheckRule(new OnlyActiveHoldingCanBeRemovedFromPortfolioRule(stockId, holdings));
+
+            var holding = holdings.Single(x => x.StockId == stockId);
 
             holding.Remove();
         }
-
-        private string _name;
-
-        private List<PortfolioHolding> _holdings;
-
-        private DateTime _createDate;
     }
 }

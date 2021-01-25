@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Volta.BuildingBlocks.Domain.Entities;
 using Volta.Stocks.Domain.Stocks.Events;
+using Volta.Stocks.Domain.Stocks.Rules;
 using Volta.Stocks.Domain.Stocks.Services;
 
 namespace Volta.Stocks.Domain.Stocks
@@ -17,34 +18,34 @@ namespace Volta.Stocks.Domain.Stocks
         private ProfitMargin profitMargin;
         private TotalRevenue totalRevenue;
         private DividendYield dividendYield;
+        private DateTime lastUpdatedDate;
 
         private Stock() { }
 
-        private Stock(CompanyName companyName, TickerSymbol tickerSymbol, MarketCap marketCap, PeRatio peRatio, PegRatio pegRatio, PriceToBookRatio priceToBookRatio,
-            ProfitMargin profitMargin, TotalRevenue totalRevenue, DividendYield dividendYield)
+        private Stock(CompanyName companyName, TickerSymbol tickerSymbol, IStockExistsChecker stockExistsChecker, IStockLookup stockLookup)
         {
+            CheckRule(new StockMustNotExistRule(companyName, stockExistsChecker));
+
+            var liveStockData = stockLookup.GetLiveStockData(tickerSymbol).GetAwaiter().GetResult();
+            
             Id = new StockId(Guid.NewGuid());
             this.companyName = companyName;
             this.tickerSymbol = tickerSymbol;
-            this.marketCap = marketCap;
-            this.peRatio = peRatio;
-            this.pegRatio = pegRatio;
-            this.priceToBookRatio = priceToBookRatio;
-            this.profitMargin = profitMargin;
-            this.totalRevenue = totalRevenue;
-            this.dividendYield = dividendYield;
+            this.marketCap = liveStockData.MarketCap;
+            this.peRatio = liveStockData.PeRatio;
+            this.pegRatio = liveStockData.PegRatio;
+            this.priceToBookRatio = liveStockData.PriceToBookRatio;
+            this.profitMargin = liveStockData.ProfitMargin;
+            this.totalRevenue = liveStockData.TotalRevenue;
+            this.dividendYield = liveStockData.DividendYield;
+            this.lastUpdatedDate = DateTime.UtcNow;
 
             AddDomainEvent(new StockCreatedDomainEvent(this.Id, this.companyName, this.tickerSymbol));
         }
 
-        public static async Task<Stock> Create(CompanyName companyName, TickerSymbol tickerSymbol, IStockLookup stockLookup)
+        public static Stock Create(CompanyName companyName, TickerSymbol tickerSymbol, IStockExistsChecker stockExistsChecker, IStockLookup stockLookup)
         {
-            var liveStockData = LiveStockData.Of(MarketCap.Of(1), PeRatio.Of(1), PegRatio.Of(1),
-                PriceToBookRatio.Of(1), ProfitMargin.Of(1), TotalRevenue.Of(1),
-                DividendYield.Of(1)); /*await stockLookup.GetLiveStockData(tickerSymbol).ConfigureAwait(false);*/
-
-            return new Stock(companyName, tickerSymbol, liveStockData.MarketCap, liveStockData.PeRatio, liveStockData.PegRatio, 
-                liveStockData.PriceToBookRatio, liveStockData.ProfitMargin, liveStockData.TotalRevenue, liveStockData.DividendYield);
+            return new Stock(companyName, tickerSymbol, stockExistsChecker, stockLookup);
         }
 
         public async void Update(IStockLookup stockLookup)
@@ -58,6 +59,8 @@ namespace Volta.Stocks.Domain.Stocks
             ChangeProfitMargin(liveStockData.ProfitMargin);
             ChangeTotalRevenue(liveStockData.TotalRevenue);
             ChangeDividendYield(liveStockData.DividendYield);
+
+            SetLastUpdatedDate();
         }
 
         private void ChangeMarketCap(MarketCap marketCap)
@@ -114,6 +117,13 @@ namespace Volta.Stocks.Domain.Stocks
             this.dividendYield = dividendYield;
 
             AddDomainEvent(new StockDividendYieldChangedDomainEvent(Id, this.dividendYield));
+        }
+
+        private void SetLastUpdatedDate()
+        {
+            this.lastUpdatedDate = DateTime.UtcNow;
+
+            AddDomainEvent(new StockLastUpdatedDateChangedDomainEvent(Id, this.lastUpdatedDate));
         }
 
     }

@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.BuildingBlocks.Applic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7B0427AF-B400-4DA4-BD59-EF7DE58EDAE4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Portfolios.Tests.UnitTests", "src\Modules\Portfolio\Tests\Volta.Portfolio.Tests.UnitTests\Volta.Portfolios.Tests.UnitTests.csproj", "{E7DA35F2-4A92-42A8-B2F9-1EE5A172BC3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Portfolios.Domain.UnitTests", "src\Modules\Portfolio\Tests\Volta.Portfolio.Tests.UnitTests\Volta.Portfolios.Domain.UnitTests.csproj", "{E7DA35F2-4A92-42A8-B2F9-1EE5A172BC3C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Customers", "Customers", "{731BA59E-E744-4916-9F5B-E10C6436E6D8}"
 EndProject
@@ -67,9 +67,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.Stocks.IntegrationEve
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{832486A5-EA19-4368-8A86-932AFEFABC0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volta.BuildingBlocks.Application.Tests", "src\BuildingBlocks\Volta.BuildingBlocks.Application.Tests\Volta.BuildingBlocks.Application.Tests.csproj", "{54CC71C6-8A63-48E2-B8D0-BCF1312B74C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.BuildingBlocks.Application.Tests", "src\BuildingBlocks\Volta.BuildingBlocks.Application.Tests\Volta.BuildingBlocks.Application.Tests.csproj", "{54CC71C6-8A63-48E2-B8D0-BCF1312B74C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volta.BuildingBlocks.Test", "src\BuildingBlocks\Volta.BuildingBlocks.Test\Volta.BuildingBlocks.Test.csproj", "{C4451333-F83C-496B-8352-EDC32596E9CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volta.BuildingBlocks.Test", "src\BuildingBlocks\Volta.BuildingBlocks.Test\Volta.BuildingBlocks.Test.csproj", "{C4451333-F83C-496B-8352-EDC32596E9CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
