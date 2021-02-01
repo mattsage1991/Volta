@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Volta.Portfolios.Domain.Portfolios;
 
-namespace Volta.Portfolios.Infrastructure.Domain.Portfolios
+namespace Volta.Portfolios.Infrastructure
 {
     public class PortfolioRepository : IPortfolioRepository
     {

@@ -10,52 +10,47 @@ using Xunit;
 
 namespace Volta.Portfolios.Domain.UnitTests.Portfolios
 {
-    public class PortfolioAddHoldingTests : TestBase
+    public class PortfolioRemoveHoldingTests : TestBase
     {
         private readonly TestHarness harness;
 
-        public PortfolioAddHoldingTests()
+        public PortfolioRemoveHoldingTests()
         {
             harness = new TestHarness();
         }
 
         [Fact]
-        public void AddHolding_WhenAllConditionsAllowsNewHolding_IsSuccessful()
+        public void RemoveHolding_WhenStockIsAHolding_IsSuccessful()
         {
             // Arrange
             var portfolio = harness.CreatePortfolio();
             var stockId = new StockId(Guid.NewGuid());
             var averageCost = AverageCost.Of(MoneyValue.Of(10, "USD"));
             var numberOfShares = NumberOfShares.Of(100);
+            var holdingId = portfolio.AddHolding(stockId, averageCost, numberOfShares);
 
             // Act
-            portfolio.AddHolding(stockId, averageCost, numberOfShares);
+            portfolio.RemoveHolding(stockId);
 
             //Assert
             using var _ = new AssertionScope();
 
-            var domainEvent = AssertPublishedDomainEvent<HoldingAddedDomainEvent>(portfolio);
-            domainEvent.PortfolioId.Should().Be(portfolio.Id);
-            domainEvent.StockId.Should().Be(stockId);
-            domainEvent.AverageCost.Should().Be(averageCost);
-            domainEvent.NumberOfShares.Should().Be(numberOfShares);
+            var domainEvent = AssertPublishedDomainEvent<HoldingRemovedDomainEvent>(portfolio);
+            domainEvent.HoldingId.Should().Be(holdingId);
         }
 
         [Fact]
-        public void AddHolding_WhenStockAlreadyExistsInPortfolio_IsNotPossible()
+        public void RemoveHolding_WhenStockIsNotAHolding_IsNotPossible()
         {
             // Arrange
             var portfolio = harness.CreatePortfolio();
             var stockId = new StockId(Guid.NewGuid());
-            var averageCost = AverageCost.Of(MoneyValue.Of(10, "USD"));
-            var numberOfShares = NumberOfShares.Of(100);
-            portfolio.AddHolding(stockId, averageCost, numberOfShares);
 
             // Act
-            Action act = () => portfolio.AddHolding(stockId, averageCost, numberOfShares);
+            Action act = () => portfolio.RemoveHolding(stockId);
 
-            // Assert
-            AssertBrokenRule<StockCannotBeAHoldingOfPortfolioMoreThanOnce>(act);
+            //Assert
+            AssertBrokenRule<OnlyActiveHoldingCanBeRemovedFromPortfolioRule>(act);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Volta.Portfolios.Domain.PortfolioOwners;
 using Volta.Portfolios.Domain.Portfolios;
 using Volta.Portfolios.Domain.Stocks;
 
@@ -12,18 +13,19 @@ namespace Volta.Portfolios.Infrastructure.EntityConfigurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.OwnsOne<MemberId>("memberId", b =>
-            {
-                b.Property(x => x.Value).HasColumnName("MemberId").IsRequired();
-            });
-
+            builder.HasOne<PortfolioOwner>().WithMany().HasForeignKey("portfolioOwnerId").IsRequired();
+            builder.Property(x => x.portfolioOwnerId).HasColumnName("PortfolioOwnerId").IsRequired(true);
+            
             builder.OwnsOne<PortfolioName>("portfolioName", b =>
             {
-                b.Property(x => x.Value).HasColumnName("portfolioName");
+                b.Property(x => x.Value).HasColumnName("PortfolioName");
+            });
+
+            builder.OwnsOne<PortfolioCreatedDate>("portfolioCreatedDate", b =>
+            {
+                b.Property(x => x.Value).HasColumnName("PortfolioCreatedDate");
             });
             
-            builder.Property("createdDate").HasColumnName("CreatedDate");
-
             builder.HasMany<Holding>("holdings");
 
             builder.Ignore(x => x.DomainEvents);

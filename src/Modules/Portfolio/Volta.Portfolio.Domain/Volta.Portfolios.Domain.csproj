@@ -8,8 +8,4 @@
     <ProjectReference Include="..\..\..\BuildingBlocks\Volta.BuildingBlocks.Domain\Volta.BuildingBlocks.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Members\" />
-  </ItemGroup>
-
 </Project>

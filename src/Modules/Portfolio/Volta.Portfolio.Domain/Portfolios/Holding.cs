@@ -9,22 +9,22 @@ namespace Volta.Portfolios.Domain.Portfolios
     public class Holding : Entity<HoldingId>
     {
         internal StockId StockId { get; }
-        internal AverageCost AverageCost { get; }
-        internal NumberOfShares NumberOfShares { get; }
-        internal DateTime AddedDate;
-        internal DateTime? RemovedDate;
-        internal bool IsRemoved;
+        internal DateTime AddedDate { get; }
+        private AverageCost averageCost;
+        private NumberOfShares numberOfShares;
+        private DateTime? removedDate;
+        private bool isRemoved;
 
         private Holding() { }
 
         private Holding(StockId stockId, AverageCost averageCost, NumberOfShares numberOfShares)
         {
             StockId = stockId;
-            AverageCost = averageCost;
-            NumberOfShares = numberOfShares;
+            this.averageCost = averageCost;
+            this.numberOfShares = numberOfShares;
             AddedDate = DateTime.UtcNow;
-            IsRemoved = false;
-            RemovedDate = null;
+            isRemoved = false;
+            removedDate = null;
         }
 
         internal static Holding Create(StockId stockId, AverageCost averageCost, NumberOfShares numberOfShares)
@@ -34,15 +34,23 @@ namespace Volta.Portfolios.Domain.Portfolios
 
         internal bool IsActive()
         {
-            return !IsRemoved;
+            return !isRemoved;
+        }
+
+        internal void Update(AverageCost averageCost, NumberOfShares numberOfShares)
+        {
+            this.averageCost = averageCost;
+            this.numberOfShares = numberOfShares;
+
+            AddDomainEvent(new HoldingUpdatedDomainEvent(Id, averageCost, numberOfShares));
         }
 
         internal void Remove()
         {
-            if (!this.IsRemoved)
+            if (!this.isRemoved)
             {
-                IsRemoved = true;
-                RemovedDate = DateTime.UtcNow;
+                isRemoved = true;
+                removedDate = DateTime.UtcNow;
 
                 AddDomainEvent(new HoldingRemovedDomainEvent(Id));
             }

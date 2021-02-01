@@ -9,4 +9,8 @@
     <ProjectReference Include="..\Volta.Portfolio.Domain\Volta.Portfolios.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

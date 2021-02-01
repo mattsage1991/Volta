@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\Volta.BuildingBlocks.Infrastructure.EntityFramework\Volta.BuildingBlocks.Infrastructure.EntityFramework.csproj" />
     <ProjectReference Include="..\Volta.Portfolio.Domain\Volta.Portfolios.Domain.csproj" />
   </ItemGroup>
 
