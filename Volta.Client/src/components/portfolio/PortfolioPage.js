@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import * as portfolioActions from '../../redux/actions/portfolioActions';
 import PropTypes from 'prop-types';
 import {bindActionCreators} from "redux";
+import PortfolioTable from "./PortfolioTable";
 
 class PortfolioPage extends React.Component {
     state = {
@@ -23,15 +24,11 @@ class PortfolioPage extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <h2>Portfolio</h2>
-                <h3>Add Holding</h3>
-                <input type="text" onChange={this.handleChange} value={this.state.holding.tickerSymbol}/>
-                <input type="submit" value="Save"/>
-                {this.props.portfolio.map(holding => (
-                    <div key={holding.tickerSymbol}>{holding.tickerSymbol}</div>
-                ))}
-            </form>
+            <div className="flex flex-wrap mt-4">
+                <div className="w-full mb-12 px-4">
+                    <PortfolioTable />
+                </div>
+            </div>
         );
     }
 }
