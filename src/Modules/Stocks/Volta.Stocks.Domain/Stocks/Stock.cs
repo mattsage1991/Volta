@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Volta.BuildingBlocks.Domain.Entities;
 using Volta.Stocks.Domain.Stocks.Events;
 using Volta.Stocks.Domain.Stocks.Rules;

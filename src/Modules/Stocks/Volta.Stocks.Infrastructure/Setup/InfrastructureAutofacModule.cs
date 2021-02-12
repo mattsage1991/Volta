@@ -20,11 +20,7 @@ namespace Volta.Stocks.Infrastructure.Setup
         {
             this.databaseConnectionString = databaseConnectionString ?? throw new ArgumentNullException(nameof(databaseConnectionString));
         }
-
-        /// <summary>
-        /// The Load.
-        /// </summary>
-        /// <param name="builder">The builder <see cref="ContainerBuilder"/>.</param>
+        
         protected override void Load(ContainerBuilder builder)
         {
             builder.Register(c =>
